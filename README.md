@@ -1,7 +1,7 @@
 
 # emcs-api-testing-guide
 
-This is a placeholder README.md for a new repository
+This is a placeholder README.md for the emcs-api-testing-guide
 
 ### License
 
