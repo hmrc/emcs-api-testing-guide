@@ -18,3 +18,12 @@
 .DS_Store
 
 Staticfile.auth
+
+# Ignore IDE files
+/.idea_modules
+/.idea
+/*.iml
+/*.ipr
+/project
+/public
+/target

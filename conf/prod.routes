@@ -1,0 +1,4 @@
+->      /                                                  health.Routes
+GET     /guides/emcs-api-testing-guide           controllers.Default.redirect(to = "/guides/emcs-api-testing-guide/")
+GET     /guides/emcs-api-testing-guide/          controllers.Assets.at(path="/public", file="index.html")
+GET     /guides/emcs-api-testing-guide/*file     controllers.Assets.at(path="/public", file)
