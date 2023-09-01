@@ -9,6 +9,9 @@
 
 # Ignore the build directory
 /build
+/project
+/public
+/target
 
 # Ignore cache
 /.sass-cache
@@ -24,6 +27,3 @@ Staticfile.auth
 /.idea
 /*.iml
 /*.ipr
-/project
-/public
-/target
