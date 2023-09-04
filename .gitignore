@@ -9,6 +9,9 @@
 
 # Ignore the build directory
 /build
+/project
+/public
+/target
 
 # Ignore cache
 /.sass-cache
@@ -18,3 +21,9 @@
 .DS_Store
 
 Staticfile.auth
+
+# Ignore IDE files
+/.idea_modules
+/.idea
+/*.iml
+/*.ipr
