@@ -1,25 +1,67 @@
 ---
-title: About the [name of API] API
+title: EMCS API testing guide
 weight: 10
 ---
 
-# About the [name of API] API
+# EMCS API testing guide
 
-<%= warning_text("You can use the Technical Documentation Template (TDT) to create and publish technical documentation for users in government, including API documentation.<br/><br/>
-We’ve provided these starting pages with a best practice API documentation structure. It includes the template structure of the documentation sections you need, and is based on <a href='https://www.gov.uk/guidance/how-to-document-apis'>our latest guidance on how to document APIs</a>.<br/><br/>
-You can also start from scratch if you’re not using the TDT to create API documentation.") %>
+This is a prototype testing guide used for research. The testing process it describes is still in development.
 
-Use this section to start your documentation with a short overview of:
+Learn how to test the compatibility of your software with [Excise Movement Control System (EMCS) API](api-documentation/docs/api/service/excise-movement-control-system-api/1.0).
 
-- what your API does and does not do
-- whether your API is in the alpha, beta or live phase
-- the benefits of using the API, so users can compare it to other APIs
-- whether it’s free to use
-- whether your users need to build or buy anything before they use it (technical prerequisites)
-- who can use your API, and any restrictions on using it or its data
+## Before you start
 
-Avoid trying to sell your API. Describe features as benefits for your users instead.
+When you are ready to test your software, first read and understand the [EMCS API service guide](guides/emcs-api-service-guide/) and [EMCS API technical interface specification]() if you have not already done so.
 
-Keep your introduction short, so your users can read and understand it easily. For example see the [GOV.UK Platform as a Service (PaaS) introduction page](https://docs.cloud.service.gov.uk/#gov-uk-platform-as-a-service).
+### Testing cycles
 
-You can read more about [documentating APIs](https://www.gov.uk/guidance/how-to-document-apis).
+You will have to complete at least one testing cycle prior to the go-live of EMCS API.
+
+|Cycle   |Description |Start Date |End Date |Scope   |Message |
+|--------|--------    |--------   |-------- |--------|--------|
+|        |            |           |         |        |        |
+
+### Test environments
+
+You must use our sandbox environment and EMCS API Test to test the compatibility of your software with EMCS API.
+
+#### Test support API
+
+- Information about the test support API will appear here.
+
+#### EMCS API Test
+
+- Information about EMCS API Test will appear here.
+
+##### Accessing EMCS API Test
+
+- Information about accessing EMCS API Test will appear here.
+
+### Testing prerequisites
+
+For information about actions that must be completed before testing, see the getting started section of the [EMCS API service guide](/guides/emcs-api-service-guide/#getting-started)
+
+### Message sizes
+
+EMCS API supports messages up to 10MB in size.
+
+**Note:** The 10MB limit for messages is testable in EMCS API Test.
+
+## Related documentation
+
+- [EMCS API service guide](/guides/emcs-api-service-guide/#getting-started)
+- [EMCS API reference](/api-documentation/docs/api/service/excise-movement-control-system-api/1.0/oas/page)
+- [EMCS API technical interface specification]()
+- [EMCS API changelog]()
+
+## Getting help and support
+
+Before contacting us, find out if there is planned API downtime or a technical issue by checking [HMRC API Platform Status](https://api-platform-status.production.tax.service.gov.uk/) and [Excise Movement Control System service availability](https://www.gov.uk/government/publications/excise-movement-and-control-system-emcs-service-availability-and-issues).
+
+If you have specific questions about the EMCS API, contact our Software Developer Support (SDS) Team. You’ll get an initial response within 2 working days.
+
+You can also email questions to [SDSTeam@hmrc.gov.uk](mailto:SDSTeam@hmrc.gov.uk). We might ask for more detailed information when we respond.
+
+## Changelog
+
+You can find the changelog for this document in the [emcs-api-testing-guide](https://github.com/hmrc/emcs-api-testing-guide) GitHub wiki.
