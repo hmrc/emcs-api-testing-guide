@@ -1,24 +1,38 @@
+# Human read-able name for this site, displayed in the header bar
+service_name: EMCS API testing guide
+
+# The route that will be used to access this site (with tailing slash)
+service_link: /guides/emcs-api-testing-guide/
+
+
+# ================================================
+# You shouldn't need to edit anything below here
+# ================================================
+
 # Host to use for canonical URL generation (without trailing slash)
-host: emcs-api-testing-guide
+host: developer.service.hmrc.gov.uk
 
 # Header-related options
 show_govuk_logo: true
-service_name: Name of API
-service_link: https://www.larry-the-cat.service.gov.uk
-phase: Beta
+phase: Alpha
 
 # Links to show on right-hand-side of header
 header_links:
-  About: https://www.larry-the-cat.service.gov.uk/about
-  Get Started: https://www.larry-the-cat.service.gov.uk/get-started
-  Documentation: /
-  Support: https://www.larry-the-cat.service.gov.uk/support
+  Developer Hub: https://developer.service.hmrc.gov.uk
+  Documentation: https://developer.service.hmrc.gov.uk/api-documentation/docs/using-the-hub
+  Applications: https://developer.service.hmrc.gov.uk/developer/applications
+  Support: https://developer.service.hmrc.gov.uk/developer/support
+
+footer_links:
+  Accessibility statement: https://www.tax.service.gov.uk/accessibility-statement/hmrc-developer-hub
 
 # Enables search functionality. This indexes pages only and is not recommended for single-page sites.
 enable_search: false
 
-# Tracking ID from Google Analytics (e.g. UA-XXXX-Y)
-ga_tracking_id:
+# Enables the tracking consent banner
+tracking_consent_frontend:
+  url: /tracking-consent/tracking.js
+  gtm_container: b
 
 # Enable multipage navigation in the sidebar
 multipage_nav: true
@@ -29,11 +43,9 @@ collapsible_nav: true
 # Table of contents depth – how many levels to include in the table of contents.
 # If your ToC is too long, reduce this number and we'll only show higher-level
 # headings.
-max_toc_heading_level: 2
+max_toc_heading_level: 5
 
 # Prevent robots from indexing (e.g. whilst in development)
-prevent_indexing: false
+prevent_indexing: true
 
-show_contribution_banner: true
-github_repo: alphagov/YOUR_REPO
-github_branch: main
+show_contribution_banner: false
