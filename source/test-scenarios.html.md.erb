@@ -7,17 +7,107 @@ weight: 30
 
 This is a prototype testing guide used for research. The testing process it describes is still in development.
 
-Information about test scenarios will appear here, including:
+## Endpoint: /emcs/digital-submit-new-message/v1
 
-- running test scenarios
-- a range of test scenarios, including information about: 
-    - the test purpose
-    - process flows
-    - actions to take
-    - data to send
-    - expected results
+This is a POST endpoint. It expects a request in the form of 
 
-| Step | Action | Manual Intervention | Data | Result |
-| ---- | ------ | ------------------- | ---- | ------ |
-|   1  |        |                     |      |        |
-|   2  |        |                     |      |        |
+```
+{
+"emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028",
+"createdDateTime": "2021-12-17T09:30:47Z",
+"messageType": "IE815",
+"source": "APIP",
+"user": "User1",
+"message": "PFBlcnNvbj48Zmlyc3ROYW1lPlRJTTwvZmlyc3ROYW1lPjwvUGVyc29uPg=="
+}
+```
+
+| Local reference number (LRN) | 	Response                 |
+|:-----------------------------|:--------------------------|
+| SendA400                     | 400 Bad Request           |
+| SendA404                     | 404 Not Found             |
+| SendA500                     | 500 Internal Server Error |
+| SendA503                     | 503 Service Unavailable   |
+| Any other valid value        | 200 Success               |
+
+A success response will take the form of 
+
+```
+{
+"status": "OK",
+"message": "Message successfully received by EMCS",
+"emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
+}
+```
+
+An error response will take the form of
+
+```
+{
+    "dateTime": "2021-12-17T09:31:12Z",
+    "status": "BAD_REQUEST",
+    "message": "Json validation failed",
+    "debugMessage": "user is missing but it is required",
+    "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
+}
+```
+## Test Excise Registration Numbers (ERNs) for Messages Endpoint
+
+These ERNs are to be used to simulate different response scenarios for both the 
+show-new-messages and message-receipt endpoint
+
+| Excise Registration Number (ERN) | 	Response                 |
+|:---------------------------------|:--------------------------|
+| SendA400                         | 400 Bad Request           |
+| SendA404                         | 404 Not Found             |
+| SendA422                         | 422 Unprocessable Entity  |
+| SendA500                         | 500 Internal Server Error |
+| SendA503                         | 503 Service Unavailable   |
+| Any other valid value            | 200 Success               |
+
+
+## Endpoint: /apip-emcs/messages/v1/show-new-messages/{ern}
+
+This is a GET endpoint. It takes a query parameter of the excise registration number
+
+A success response will take the form of
+
+```
+{
+"dateTime": "2023-09-07T12:39:20.354Z",
+"exciseRegistrationNumber": "XIWK000467015",
+"message": Base64 encoded XML here
+}
+```
+
+A 422 or 500 response will take the form of
+
+```
+{
+"dateTime": "2023-09-06T14:32:48.666Z",
+"messages": "['ERN is missing','source is missing']"
+}
+```
+
+## Endpoint: /apip-emcs/messages/v1/message-receipt/{ern}
+
+This is a PUT endpoint. It takes a query parameter of the excise registration number
+
+A success response will take the form of
+
+```
+{
+"dateTime": "2023-09-07T12:39:20.354Z",
+"exciseRegistrationNumber": "XIWK000467015",
+"recordsAffected": 10
+}
+```
+
+A 422 or 500 response will take the form of
+
+```
+{
+"dateTime": "2023-09-06T14:32:48.666Z",
+"messages": "['ERN is missing','source is missing']"
+}
+```
