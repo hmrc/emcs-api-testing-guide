@@ -7,20 +7,12 @@ weight: 30
 
 This is a prototype testing guide used for research. The testing process it describes is still in development.
 
-## Endpoint: /emcs/digital-submit-new-message/v1
+## Endpoint: Submit a new draft excise movement.
 
-This is a POST endpoint. It expects a request in the form of 
+To test [this endpoint](/api-documentation/docs/api/service/excise-movement-control-system-api/1.0/oas/page#tag/Movements/operation/submitMovement) in the External Test environment, you will need to provide a request with an XML body that conforms to the [IE815 XML Schema](https://github.com/hmrc/excise-movement-control-system-api/blob/main/app/xsd/ie815-v16-0.xsd).
 
-```
-{
-"emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028",
-"createdDateTime": "2021-12-17T09:30:47Z",
-"messageType": "IE815",
-"source": "APIP",
-"user": "User1",
-"message": "PFBlcnNvbj48Zmlyc3ROYW1lPlRJTTwvZmlyc3ROYW1lPjwvUGVyc29uPg=="
-}
-```
+Within the IE815 XML body you can send the following local reference numbers (LRNs) to simulate responses:
+
 
 | Local reference number (LRN) | 	Response                 |
 |:-----------------------------|:--------------------------|
@@ -34,80 +26,53 @@ A success response will take the form of
 
 ```
 {
-"status": "OK",
-"message": "Message successfully received by EMCS",
-"emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
+  "consignorId": "GBWK002281023",
+  "consigneeId": "GBWKQOZ8OVLYR",
+  "localReferenceNumber": "LRNQA20230909022221",
+  "status": "Accepted"
 }
 ```
 
-An error response will take the form of
+A 400 Bad Request error response will take the form of
 
 ```
 {
-    "dateTime": "2021-12-17T09:31:12Z",
-    "status": "BAD_REQUEST",
-    "message": "Json validation failed",
-    "debugMessage": "user is missing but it is required",
-    "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
-}
-```
-## Test Excise Registration Numbers (ERNs) for Messages Endpoint
-
-These ERNs are to be used to simulate different response scenarios for both the 
-show-new-messages and message-receipt endpoint
-
-| Excise Registration Number (ERN) | 	Response                 |
-|:---------------------------------|:--------------------------|
-| SendA400                         | 400 Bad Request           |
-| SendA404                         | 404 Not Found             |
-| SendA422                         | 422 Unprocessable Entity  |
-| SendA500                         | 500 Internal Server Error |
-| SendA503                         | 503 Service Unavailable   |
-| Any other valid value            | 200 Success               |
-
-
-## Endpoint: /apip-emcs/messages/v1/show-new-messages/{ern}
-
-This is a GET endpoint. It takes a query parameter of the excise registration number
-
-A success response will take the form of
-
-```
-{
-"dateTime": "2023-09-07T12:39:20.354Z",
-"exciseRegistrationNumber": "XIWK000467015",
-"message": Base64 encoded XML here
+  "dateTime": "2021-12-17T09:30:47Z",
+  "message": "Json validation failed",
+  "debugMessage": "user is missing but it is required",
+  "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
 }
 ```
 
-A 422 or 500 response will take the form of
+A 404 Not Found error response will take the form of
 
 ```
 {
-"dateTime": "2023-09-06T14:32:48.666Z",
-"messages": "['ERN is missing','source is missing']"
+  "dateTime": "2021-12-17T09:30:47Z",
+  "message": "Received error response from server",
+  "debugMessage": "Connection refused; nested exception is java.net.ConnectException: Connection refused",
+  "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
 }
 ```
 
-## Endpoint: /apip-emcs/messages/v1/message-receipt/{ern}
-
-This is a PUT endpoint. It takes a query parameter of the excise registration number
-
-A success response will take the form of
+A 500 Internal Server Error response will take the form of
 
 ```
 {
-"dateTime": "2023-09-07T12:39:20.354Z",
-"exciseRegistrationNumber": "XIWK000467015",
-"recordsAffected": 10
+  "dateTime": "2021-12-17T09:30:47Z",
+  "message": "Invalid JSON structure",
+  "debugMessage": "JSON parse error: Unexpected character",
+  "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
 }
 ```
 
-A 422 or 500 response will take the form of
+A 503 Service Unavailable error response will take the form of
 
 ```
 {
-"dateTime": "2023-09-06T14:32:48.666Z",
-"messages": "['ERN is missing','source is missing']"
+  "dateTime": "2021-12-17T09:30:47Z",
+  "message": "CIRCUIT_BREAKER - 815_CB is OPEN",
+  "debugMessage": "CircuitBreaker '815_CB' is OPEN and does not permit further calls",
+  "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
 }
 ```
