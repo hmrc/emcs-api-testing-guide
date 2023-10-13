@@ -13,13 +13,19 @@ Learn how to test the compatibility of your software with [Excise Movement Contr
 
 When you are ready to test your software, first read and understand the [EMCS API service guide](/guides/emcs-api-service-guide/) and [EMCS API technical interface specification]() if you have not already done so.
 
+You must complete the following steps before testing the API.
+
+1. Ensure that you have an [HMRC developer account](https://developer.service.hmrc.gov.uk/developer/login) - if you do not have one, you must [register for an account](https://developer.service.hmrc.gov.uk/developer/registration), activate it by email, and sign in.
+2. [Create an application](https://developer.service.hmrc.gov.uk/developer/applications/add/sandbox) in our test environment called the sandbox.
+3. Subscribe to the Excise Movement Control System API on the manage API subscriptions page.
+4. Obtain your [Client ID and Client secret credentials](https://developer.service.hmrc.gov.uk/api-documentation/docs/authorisation/credentials).
+5. Follow the steps to [obtain a bearer token](/guides/emcs-api-testing-guide/documentation/obtain-a-bearer-token).
+6. Use your application to make calls to our stubbed test API.
+7. Test the [test scenarios](/guides/emcs-api-testing-guide/documentation/test-scenarios)
+
 ### Test environment
 
 To allow users to be able to rapidly test the new EMCS API, we have stubbed the back end. If you submit a specific message, you will receive a pre-defined response. There is no validation on the messages, except for simple schema validation.
-
-### Testing prerequisites
-
-For information about actions that must be completed before testing, see the getting started section of the [EMCS API service guide](/guides/emcs-api-service-guide/#getting-started)
 
 ## Related documentation
 
