@@ -5,9 +5,29 @@ weight: 30
 
 # Testing process
 
-This is a prototype testing guide used for research. The testing process it describes is still in development.
-
 You must test the compatibility of your software with [EMCS API](https://developer.service.hmrc.gov.uk/api-documentation/docs/api/service/excise-movement-control-system-api/1.0).
 
-You will be able to connect to the [API in External Test]().
+After [obtaining a bearer token](obtain-a-bearer-token.html), use postman or curl to call the API at: <br></br> `https://test-api.service.hmrc.gov.uk/customs/excise/movements`
 
+The following values in angled brackets (<>) must be replaced:
+
+- `<your-access-token>` - your [bearer token](obtain-a-bearer-token.html). Make sure to replace the angled brackets (<>) as well.
+- `<urn:IE815>...</urn:IE815>` - keep the angled brackets (<>), and replace with the relevant IE number and [XML for the message you are testing](https://github.com/hmrc/excise-movement-control-system-api/tree/main/app/xsd).
+
+For example:
+
+```
+POST /customs/excise/movements HTTP/1.1
+Content-Type: application/xml
+Accept: application/vnd.hmrc.1.0+json
+Authorization: Bearer <your-access-token>
+Host: test-api.service.hmrc.gov.uk
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Content-Length: 5309
+<urn:IE815>
+ ...
+</urn:IE815>
+```
+
+Make sure to test your software with all the messages and endpoints in the [test scenarios](test-scenarios.html).

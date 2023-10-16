@@ -5,37 +5,26 @@ weight: 20
 
 # Obtain a bearer token
 
-This is a prototype testing guide used for research. The testing process it describes is still in development.
+Follow these steps to obtain a bearer token so that you can test your software with EMCS API. 
 
-Follow these steps to obtain a bearer token so that you can test your software with EMCS API. Any values in angled brackets (<>) must be replaced.
+The following values in angled brackets (<>) must be replaced, including the brackets:
+
+- `<your-app-clientID>` - your Client ID credentials, obtained from the Developer Hub.
+- `<your-trader-identifier>` - your ConsignorID or ConsigneeID
+- `<your-app-client-secret>` - your Client secret credentials, obtained from the Developer Hub.
+- `<your-authorisation-code>` - your authorisation code, obtained in step 10 of this process.
 
 1. Navigate to [Authority Wizard](https://test-www.tax.service.gov.uk/auth-login-stub/gg-sign-in).
-2. Set the Redirect URL to `https://test-www.tax.service.gov.uk/oauth/authorize?client_id=<your-app-clientId>&redirect_uri=urn:ietf:wg:oauth:2.0:oob&scope=excise-movement-control-system&response_type=code`
+2. Set the Redirect URL to: <br></br> `https://test-www.tax.service.gov.uk/oauth/authorize?client_id=<your-app-clientID>&redirect_uri=urn:ietf:wg:oauth:2.0:oob&scope=excise-movement-control-system&response_type=code`<br></br>
 3. Set the Confidence Level to `200`.
 4. Set the Affinity Group to `Organisation`.
-5. In the Enrolments section add an enrolment:
-`Enrolment Key = HMRC-EMCS-ORG, Identifier Name = ExciseNumber, Identifier Value = <your-excise-number>`
+5. In the Enrolments section add an enrolment with these values:<br></br>
+`Enrolment Key = HMRC-EMCS-ORG, Identifier Name = ExciseNumber, Identifier Value = <your-trader-identifier>, Status = Activated`<br></br>
 6. Submit the form.
 7. In the next screen click Continue.
 8. In the next screen click Sign in to Government Gateway.
 9. In the next screen click Give Permission.
 10. In the next screen copy the authorisation code.
-11. Open a terminal and enter the following curl command, making sure to replace <your-authorisation-code> with the code you just copied, and <your-app-client-id> and <your-app-client-secret> with your credentials: `curl -X POST -H "Content-Type: application/x-www-form-urlencoded" --data 'code=<your-authorisation-code>&client_id=<your-app-client-id>&client_secret=<your-app-client-secret>&redirect_uri=urn:ietf:wg:oauth:2.0:oob&grant_type=authorization_code' "https://test-api.service.hmrc.gov.uk/oauth/token"`
+11. Open a terminal and enter the following curl command:<br></br> `curl -X POST -H "Content-Type: application/x-www-form-urlencoded" --data 'code=<your-authorisation-code>&client_id=<your-app-client-ID>&client_secret=<your-app-client-secret>&redirect_uri=urn:ietf:wg:oauth:2.0:oob&grant_type=authorization_code' "https://test-api.service.hmrc.gov.uk/oauth/token"`<br></br>
 12. From the response, copy the value of the access_token
-13. Use this as a bearer token in postman or curl to call the API at `https://test-api.service.hmrc.gov.uk/customs/excise/movements`
-
-For example:
-
-```
-POST /customs/excise/movements HTTP/1.1
-Content-Type: application/xml
-Accept: application/vnd.hmrc.1.0+json
-Authorization: Bearer <your-access-token>
-Host: test-api.service.hmrc.gov.uk
-Accept-Encoding: gzip, deflate, br
-Connection: keep-alive
-Content-Length: 5309
-<urn:IE815 >
- ...
-</urn:IE815>
-```
+13. Use this as a bearer token in the [testing process](testing-process.html).
