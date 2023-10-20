@@ -1,0 +1,21 @@
+---
+title: Create a Test User
+weight: 20
+---
+
+# Create a Test User
+
+You must create a separate Test User for EMCS API. You should not use a Test User that you have created for other API services.
+
+You must not use an Economic Operators Registration and Identification (EORI) number in the body of the request. You must use this field to enter an Excise Number instead - either your Consignor ID, or your Consignee ID. 
+
+You should follow these steps to generate a Test User:
+
+1. Review the [Create Test User API documentation](https://developer.service.hmrc.gov.uk/api-documentation/docs/api/service/api-platform-test-user/1.0/) on the Developer Hub.
+2. Use postman or curl to call the [Create a test user which is an organisation](https://test-api.service.hmrc.gov.uk/create-test-user/organisation) endpoint.
+3. Use Client ID and Client secret as client credentials to generate a token.
+4. Copy that token
+5. In the body of the request
+    1. Use serviceNames: “excise-movement-control-system”
+    2. For eoriNumber: use the Test User’s Excise ID - e.g. consignor ID, consignee ID or warehousekeeper ID
+6. A successful response will return a Test User’s details. Take a note of the user ID and the password for the next step in the [testing process](testing-process.html).

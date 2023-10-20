@@ -17,9 +17,15 @@ You must complete the following steps before testing the API.
 2. [Create an application](https://developer.service.hmrc.gov.uk/developer/applications/add/sandbox) in our test environment called the sandbox.
 3. Subscribe to the Excise Movement Control System API on the manage API subscriptions page.
 4. Obtain your [Client ID and Client secret credentials](https://developer.service.hmrc.gov.uk/api-documentation/docs/authorisation/credentials).
-5. Follow the steps to [obtain a bearer token](documentation/obtain-a-bearer-token).
-6. Use your application to make calls to our stubbed test API in the [testing process](documentation/testing-process).
-7. Test the [test scenarios](documentation/test-scenarios).
+5. Use the [Create Test User API](https://developer.service.hmrc.gov.uk/api-documentation/docs/api/service/api-platform-test-user/1.0) to create one or more test users for your sandbox application. 
+
+You must [create a separate Test User for EMCS API](documentation/create-a-test-user.html). You may not be able to use Test Users from other API services.
+
+## Testing your software.
+
+1. Test the [authorisation process](https://developer.service.hmrc.gov.uk/api-documentation/docs/authorisation/user-restricted-endpoints).
+2. Use your application to make calls to our stubbed test API in the [testing process](documentation/testing-process).
+3. Test the [test scenarios](documentation/test-scenarios).
 
 ### Test environment
 
