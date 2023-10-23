@@ -1,13 +1,33 @@
 ---
 title: Testing process
-weight: 15
+weight: 30
 ---
 
 # Testing process
 
-This is a prototype testing guide used for research. The testing process it describes is still in development.
-
 You must test the compatibility of your software with [EMCS API](https://developer.service.hmrc.gov.uk/api-documentation/docs/api/service/excise-movement-control-system-api/1.0).
 
-You will be able to connect to the [API in External Test]().
+After [creating a Test User](create-a-test-user.html), use Postman or curl to call the API at: <br></br> `https://test-api.service.hmrc.gov.uk/customs/excise/movements`
 
+1. The Consignor ID should match the one used in the [Test User process](create-a-test-user.html) to be authorised to send an IE815 message.
+2. Follow details on the developer hub to get the user-restricted access token - 
+    1. Sign into government gateway with the Test User
+    2. Give permission to EMCS
+    3. Generate a token, and copy it.
+3. Use that token as bearer token in the IE815 message, replacing `[YOUR-USER-RESTRICTED-ACCESS-TOKEN]` in the example below.
+4. Replace `<urn:IE815>...</urn:IE815>` with the relevant IE number and [XML for the message you are testing](https://github.com/hmrc/excise-movement-control-system-api/tree/main/app/xsd).
+
+For example:
+
+```
+POST /customs/excise/movements HTTP/1.1
+Content-Type: application/xml
+Accept: application/vnd.hmrc.1.0+json
+Authorization: Bearer [YOUR-USER-RESTRICTED-ACCESS-TOKEN]
+Host: test-api.service.hmrc.gov.uk
+<urn:IE815>
+ ...
+</urn:IE815>
+```
+
+Make sure to test your software with all the messages and endpoints in the [test scenarios](test-scenarios.html).

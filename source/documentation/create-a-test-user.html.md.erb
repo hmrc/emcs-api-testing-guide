@@ -1,0 +1,45 @@
+---
+title: Create a Test User
+weight: 20
+---
+
+# Create a Test User
+
+You must create a separate Test User for EMCS API. You should not use a Test User that you have created for other API services.
+
+You must not use an Economic Operators Registration and Identification (EORI) number in the body of the request. You must use this field to enter an Excise Number instead - either your Consignor ID, or your Consignee ID. 
+
+You should follow these steps to generate a Test User:
+
+1. Review the [Create Test User API documentation](https://developer.service.hmrc.gov.uk/api-documentation/docs/api/service/api-platform-test-user/1.0/) on the Developer Hub.
+2. Make sure that your application is subscribed to the Create Test User API. You can find this under 'Manage API subscriptions' on the Developer Hub, in the 'APIs for testing your service' section.
+3. Use Postman or curl to call the [Create a test user which is an organisation](https://test-api.service.hmrc.gov.uk/create-test-user/organisation) endpoint. 
+4. Use Client ID and Client secret as client credentials to generate an application-restricted access token.<br></br>For example:
+
+    ```
+    POST /oauth/token HTTP/1.1
+    Content-Type: application/x-www-form-urlencoded
+    Host: test-api.service.hmrc.gov.uk
+    grant_type=client_credentials&client_id=[YOUR-CLIENT-ID]&client_secret=[YOUR-CLIENT-SECRET]
+    ```
+5. Copy that token
+6. In the body of the request
+    1. Use serviceNames: “excise-movement-control-system”
+    2. For eoriNumber: use the Test User’s Excise ID - e.g. consignor ID, consignee ID or warehousekeeper ID
+
+    For example:
+
+    ```
+    POST /create-test-user/organisations HTTP/1.1
+    Accept: application/vnd.hmrc.1.0+json
+    Authorization: Bearer [YOUR-APPLICATION-RESTRICTED-ACCESS-TOKEN]
+    Content-Type: application/json
+    Host: test-api.service.hmrc.gov.uk
+    {
+      "serviceNames": [
+        "excise-movement-control-system"
+      ],
+      "eoriNumber": "[YOUR-EXCISE-NUMBER]"
+        }
+    ```
+7. A successful response will return a Test User’s details. Take a note of the user ID and the password for the next step in the [testing process](testing-process.html).
