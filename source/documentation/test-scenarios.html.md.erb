@@ -85,7 +85,7 @@ You can test [this endpoint](/api-documentation/docs/api/service/excise-movement
 
 You will need to provide a request with an XML body that conforms to the [IE818 XML Schema](https://github.com/hmrc/excise-movement-control-system-api/blob/main/app/xsd/ie818-v16-0.xsd).
 
-Within the IE815 XML body you can send the following values as Complementary Information to simulate responses:
+Within the IE818 XML body you can send the following values as Complementary Information to simulate responses:
 
 
 | Complementary Information    | 	Response                 |
@@ -94,18 +94,9 @@ Within the IE815 XML body you can send the following values as Complementary Inf
 | SendA404                     | 404 Not Found             |
 | SendA500                     | 500 Internal Server Error |
 | SendA503                     | 503 Service Unavailable   |
-| Any other valid value        | 200 Success               |
+| Any other valid value        | 202 Accepted             |
 
-A success response will take the form of 
-
-```
-{
-  "consignorId": "GBWK002281023",
-  "consigneeId": "GBWKQOZ8OVLYR",
-  "localReferenceNumber": "LRNQA20230909022221",
-  "status": "Accepted"
-}
-```
+A success response will have headers and a status, but will contain no body content.
 
 A 400 Bad Request error response will take the form of
 
