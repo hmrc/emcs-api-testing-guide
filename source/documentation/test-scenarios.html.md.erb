@@ -79,6 +79,8 @@ A 503 Service Unavailable error response will take the form of
 
 ## Endpoint: Submit a message for an excise movement
 
+You must make sure you have first tested the [Submit a draft excise movement (IE815) endpoint](#endpoint-submit-a-new-draft-excise-movement), and received a success response.
+
 You can test [this endpoint](/api-documentation/docs/api/service/excise-movement-control-system-api/1.0/oas/page#tag/Movements/operation/postMessage) in the External Test environment with several different messages.
 
 ### IE818 - Report of receipt
@@ -139,5 +141,38 @@ A 503 Service Unavailable error response will take the form of
   "message": "CIRCUIT_BREAKER - 815_CB is OPEN",
   "debugMessage": "CircuitBreaker '815_CB' is OPEN and does not permit further calls",
   "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
+}
+```
+
+## Endpoint: Get all messages for an excise movement using the localReferenceNumber
+
+You must make sure you have first tested the [Submit a draft excise movement (IE815) endpoint](#endpoint-submit-a-new-draft-excise-movement), and received a success response.
+
+You can test [this endpoint](/api-documentation/docs/api/service/excise-movement-control-system-api/1.0/oas/page#tag/Movements/operation/getAllMessages) in the External Test environment by calling `https://test-api.service.hmrc.gov.uk/customs/excise/movements/{localReferenceNumber}/messages`.
+
+If you replace `{localReferenceNumber}` in the URL with one of these LRNs, you will return a success response:
+
+```
+LRNIE8158976912
+LRNIE8156540856
+LRNIE8155973812
+LRNIE8151695045
+LRNIE8155743934
+LRNIE8154968571
+LRNIE8151232757
+LRNIE8153786132
+LRNIE8158366950
+LRNIE8157359518
+```
+
+Any other valid LRN will return no messages.
+
+A success response will take the form of 
+
+```
+{
+"dateTime": "2023-09-07T12:39:20.354Z",
+"exciseRegistrationNumber": "XIWK000467015",
+"message": Base64 encoded XML here
 }
 ```
