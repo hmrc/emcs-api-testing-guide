@@ -76,3 +76,68 @@ A 503 Service Unavailable error response will take the form of
   "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
 }
 ```
+
+## Endpoint: Submit a message for an excise movement
+
+You can test [this endpoint](/api-documentation/docs/api/service/excise-movement-control-system-api/1.0/oas/page#tag/Movements/operation/postMessage) in the External Test environment with several different messages.
+
+### IE818 - Report of receipt
+
+You will need to provide a request with an XML body that conforms to the [IE818 XML Schema](https://github.com/hmrc/excise-movement-control-system-api/blob/main/app/xsd/ie818-v16-0.xsd).
+
+Within the IE818 XML body you can send the following values as Complementary Information to simulate responses:
+
+
+| Complementary Information    | 	Response                 |
+|:-----------------------------|:--------------------------|
+| SendA400                     | 400 Bad Request           |
+| SendA404                     | 404 Not Found             |
+| SendA500                     | 500 Internal Server Error |
+| SendA503                     | 503 Service Unavailable   |
+| Any other valid value        | 202 Accepted             |
+
+A success response will have headers and a status, but will contain no body content.
+
+A 400 Bad Request error response will take the form of
+
+```
+{
+  "dateTime": "2021-12-17T09:30:47Z",
+  "message": "Json validation failed",
+  "debugMessage": "user is missing but it is required",
+  "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
+}
+```
+
+A 404 Not Found error response will take the form of
+
+```
+{
+  "dateTime": "2021-12-17T09:30:47Z",
+  "message": "Received error response from server",
+  "debugMessage": "Connection refused; nested exception is java.net.ConnectException: Connection refused",
+  "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
+}
+```
+
+A 500 Internal Server Error response will take the form of
+
+```
+{
+  "dateTime": "2021-12-17T09:30:47Z",
+  "message": "Invalid JSON structure",
+  "debugMessage": "JSON parse error: Unexpected character",
+  "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
+}
+```
+
+A 503 Service Unavailable error response will take the form of
+
+```
+{
+  "dateTime": "2021-12-17T09:30:47Z",
+  "message": "CIRCUIT_BREAKER - 815_CB is OPEN",
+  "debugMessage": "CircuitBreaker '815_CB' is OPEN and does not permit further calls",
+  "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
+}
+```
