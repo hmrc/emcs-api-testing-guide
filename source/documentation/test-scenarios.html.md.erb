@@ -76,6 +76,55 @@ A 503 Service Unavailable error response will take the form of
   "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
 }
 ```
+## Endpoint: Get excise movements
+
+You must make sure you have first tested the [Submit a draft excise movement (IE815) endpoint](#endpoint-submit-a-new-draft-excise-movement), and received a success response.
+
+You can test [this endpoint](/api-documentation/docs/api/service/excise-movement-control-system-api/1.0/oas/page#tag/Movements/operation/getAllMovements) in the External Test environment by calling `https://test-api.service.hmrc.gov.uk/customs/excise/movements`.
+
+Within the query parameters you can send the following excise reference numbers (ERNs) to simulate responses:
+
+| Excise reference number (ERN) | 	Response                                       |
+|:-----------------------------|:--------------------------------------------------|
+| SendA400                     | 400 Bad Request                                   |
+| SendA404                     | 404 Not Found                                     |
+| SendA422                     | 422 Unprocessable Entity                          |
+| SendA500                     | 500 Internal Server Error                         |
+| SendA500NoPayload            | 500 Internal Server Error with no message payload |
+| SendA503                     | 503 Service Unavailable                           |
+| Any other valid value        | 200 Success                                       |
+
+A success response will take the form of 
+
+```
+{
+"dateTime": "2023-09-07T12:39:20.354Z",
+"exciseRegistrationNumber": "XIWK000467015",
+"message": Base64 encoded XML here
+}
+```
+
+A 422 response will take the form of
+
+```
+{
+"dateTime": "2023-09-06T14:32:48.666Z",
+"ern": "XIWK000467015"
+"arc": "230S200200202"
+"messages": "['source is missing']"
+}
+```
+
+where ern and arc are optional fields.
+
+A 500 response will take the form of
+
+```
+{
+"dateTime": "2023-09-06T14:32:48.666Z",
+"messages": "['ERN is missing','source is missing']"
+}
+```
 
 ## Endpoint: Submit a message for an excise movement
 
