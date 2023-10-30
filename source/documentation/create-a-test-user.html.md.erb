@@ -7,7 +7,15 @@ weight: 20
 
 You must create a separate Test User for EMCS API. You should not use a Test User that you have created for other API services.
 
-You must not use an Economic Operators Registration and Identification (EORI) number in the body of the request. You must use this field to enter an Excise Number instead - either your Consignor ID, or your Consignee ID. 
+## Excise Number
+
+The Create Test User API does not currently include an Excise Number field. This is in development, and will be included in a future release.
+
+In the meantime, you should use the `eoriNumber` field in the body of the request to enter an Excise Number. This replaces the Economic Operators Registration and Identification (EORI) number.
+
+If you have previously created a Test User with an EORI number you will not be able to use them to test EMCS API, and must follow the process below.
+
+## Process
 
 You should follow these steps to generate a Test User:
 
