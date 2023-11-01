@@ -20,7 +20,7 @@ Within the IE815 XML body you can send the following local reference numbers (LR
 | SendA404                     | 404 Not Found             |
 | SendA500                     | 500 Internal Server Error |
 | SendA503                     | 503 Service Unavailable   |
-| Any other valid value        | 200 Success               |
+| Any other valid value        | 202 Accepted              |
 
 A success response will take the form of 
 
@@ -42,6 +42,19 @@ A 400 Bad Request error response will take the form of
   "debugMessage": "user is missing but it is required",
   "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
 }
+```
+If the XML is invalid, a 400 Bad Request error response will be returned in the form of
+
+```
+{
+  "message": "Validation error(s) occurred",
+  "errors": [
+  {
+  "errorCode": 8084,
+  "errorMessage": "The Date of Dispatch you entered is incorrect. It must be today or later. Please amend your entry and resubmit.",
+  "location": "/urn:IE815[1]/urn:Body[1]/urn:SubmittedDraftOfEADESAD[1]/urn:EadEsadDraft[1]/urn:DateOfDispatch[1]",
+  "value": "2023-09-09"
+  }
 ```
 
 A 404 Not Found error response will take the form of
