@@ -29,7 +29,9 @@ You must [create a separate Test User for EMCS API](documentation/create-a-test-
 
 ### Test environment
 
-To allow users to be able to rapidly test the new EMCS API, we have stubbed the back end. If you submit a specific message, you will receive a pre-defined response. There is no validation on the messages, except for simple schema validation.
+To allow users to be able to rapidly test the new EMCS API, we have stubbed the back end. To act as a realistic representation of the production API, the stub provides the same validation for level 1 and level 2 validation as the production API will. It does not provide level 3 validation.
+
+You can simulate common error responses by sending messages with standard inputs. These are detailed in the [test scenarios](documentation/test-scenarios.html).
 
 ## Related documentation
 
