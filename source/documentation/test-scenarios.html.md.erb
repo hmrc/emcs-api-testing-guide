@@ -9,7 +9,7 @@ You should test the following scenarios to make sure your software is compatible
 
 ## Endpoint: Submit a new draft excise movement.
 
-To test [this endpoint](/api-documentation/docs/api/service/excise-movement-control-system-api/1.0/oas/page#tag/Movements/operation/submitMovement) in the External Test environment, you will need to provide a request with an XML body that conforms to the [IE815 XML Schema](https://github.com/hmrc/excise-movement-control-system-api/blob/main/app/xsd/ie815-v16-0.xsd).
+To test [this endpoint](/api-documentation/docs/api/service/excise-movement-control-system-api/1.0/oas/page#tag/Movements/operation/submitMovement) in the External Test environment, you will need to provide a request with an XML body that conforms to the [IE815 XML Schema](https://github.com/hmrc/excise-movement-control-system-api/blob/main/app/xsd/ie815.xsd).
 
 Within the IE815 XML body you can send the following local reference numbers (LRNs) to simulate responses:
 
@@ -49,12 +49,14 @@ If the XML is invalid, a 400 Bad Request error response will be returned in the 
 {
   "message": "Validation error(s) occurred",
   "errors": [
-  {
-  "errorCode": 8084,
-  "errorMessage": "The Date of Dispatch you entered is incorrect. It must be today or later. Please amend your entry and resubmit.",
-  "location": "/urn:IE815[1]/urn:Body[1]/urn:SubmittedDraftOfEADESAD[1]/urn:EadEsadDraft[1]/urn:DateOfDispatch[1]",
-  "value": "2023-09-09"
-  }
+    {
+      "errorCode": 8084,
+      "errorMessage": "The Date of Dispatch you entered is incorrect. It must be today or later. Please amend your entry and resubmit.",
+      "location": "/urn:IE815[1]/urn:Body[1]/urn:SubmittedDraftOfEADESAD[1]/urn:EadEsadDraft[1]/urn:DateOfDispatch[1]",
+      "value": "2023-09-09"
+    }
+  ]
+}
 ```
 
 A 404 Not Found error response will take the form of
@@ -147,7 +149,7 @@ You can test [this endpoint](/api-documentation/docs/api/service/excise-movement
 
 ### IE818 - Report of receipt
 
-You will need to provide a request with an XML body that conforms to the [IE818 XML Schema](https://github.com/hmrc/excise-movement-control-system-api/blob/main/app/xsd/ie818-v16-0.xsd).
+You will need to provide a request with an XML body that conforms to the [IE818 XML Schema](https://github.com/hmrc/excise-movement-control-system-api/blob/main/app/xsd/ie818.xsd).
 
 Within the IE818 XML body you can send the following values as Complementary Information to simulate responses:
 

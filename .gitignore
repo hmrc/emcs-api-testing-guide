@@ -27,3 +27,7 @@ Staticfile.auth
 /.idea
 /*.iml
 /*.ipr
+
+# custom ignores
+/logs/
+/.bsp/
