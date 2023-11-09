@@ -9,12 +9,33 @@ You should test the following scenarios to make sure your software is compatible
 
 ## Endpoint: Submit a new draft excise movement.
 
-To test [this endpoint](/api-documentation/docs/api/service/excise-movement-control-system-api/1.0/oas/page#tag/Movements/operation/submitMovement) in the External Test environment, you will need to provide a request with an XML body that conforms to the [IE815 XML Schema](https://github.com/hmrc/excise-movement-control-system-api/blob/main/app/xsd/ie815.xsd).
+You should test [this endpoint](/api-documentation/docs/api/service/excise-movement-control-system-api/1.0/oas/page#tag/Movements/operation/submitMovement) first.
 
-Within the IE815 XML body you can send the following local reference numbers (LRNs) to simulate responses:
+To test this endpoint in the External Test environment, you will need to provide a request with an XML body that conforms to the [IE815 XML Schema](https://github.com/hmrc/excise-movement-control-system-api/blob/main/app/xsd/ie815-v16-0.xsd). 
+
+You can activate specific responses by passing in specific values in 2 ways:
+
+1. As a local reference number (LRN). This is a legacy testing method and will be deprecated.
+2. As a MessageIdentifier value in the XML header. This is the preferred method and will take the form below:
+
+```
+<urn:Message>
+    <urn:Header>
+      <urn1:MessageSender>token</urn1:MessageSender>
+      <urn1:MessageRecipient>token</urn1:MessageRecipient>
+      <urn1:DateOfPreparation>2008-09-29</urn1:DateOfPreparation>
+      <urn1:TimeOfPreparation>00:18:33</urn1:TimeOfPreparation>
+      <urn1:MessageIdentifier>[MESSAGE IDENTIFIER VALUE]</urn1:MessageIdentifier>
+      <!--Optional:-->
+      <urn1:CorrelationIdentifier>token</urn1:CorrelationIdentifier>
+    </urn:Header>
+</urn:Message>
+```
+
+You can send the following values to simulate responses:
 
 
-| Local reference number (LRN) | 	Response                 |
+| Message Identifier / LRN value     | 	Response                 |
 |:-----------------------------|:--------------------------|
 | SendA400                     | 400 Bad Request           |
 | SendA404                     | 404 Not Found             |
@@ -95,7 +116,7 @@ A 503 Service Unavailable error response will take the form of
 
 You must make sure you have first tested the [Submit a draft excise movement (IE815) endpoint](#endpoint-submit-a-new-draft-excise-movement), and received a success response.
 
-You can test [this endpoint](/api-documentation/docs/api/service/excise-movement-control-system-api/1.0/oas/page#tag/Movements/operation/getAllMovements) in the External Test environment by calling `https://test-api.service.hmrc.gov.uk/customs/excise/movements`.
+You can test [this endpoint](/api-documentation/docs/api/service/excise-movement-control-system-api/1.0/oas/page#tag/Movements/operation/getAllMovements) in the External Test environment by calling `https://test-api.service.hmrc.gov.uk/customs/excise/movements?lrn=[YOUR_LRN]&ern=[YOUR_ERN]&arc=[YOUR_ARC]`.
 
 Within the query parameters you can send the following excise reference numbers (ERNs) to simulate responses:
 
@@ -143,24 +164,126 @@ A 500 response will take the form of
 
 ## Endpoint: Submit a message for an excise movement
 
-You must make sure you have first tested the [Submit a draft excise movement (IE815) endpoint](#endpoint-submit-a-new-draft-excise-movement), and received a success response.
-
-You can test [this endpoint](/api-documentation/docs/api/service/excise-movement-control-system-api/1.0/oas/page#tag/Movements/operation/postMessage) in the External Test environment with several different messages.
+You must make sure you have first tested the [Submit a draft excise movement (IE815) endpoint](#endpoint-submit-a-new-draft-excise-movement), and received a success response, before testing [this endpoint](/api-documentation/docs/api/service/excise-movement-control-system-api/1.0/oas/page#tag/Movements/operation/postMessage) in the External Test environment.
 
 ### IE818 - Report of receipt
 
 You will need to provide a request with an XML body that conforms to the [IE818 XML Schema](https://github.com/hmrc/excise-movement-control-system-api/blob/main/app/xsd/ie818.xsd).
 
-Within the IE818 XML body you can send the following values as Complementary Information to simulate responses:
+You can activate specific responses by passing in specific values in 2 ways:
 
+1. As a ComplementaryInformation value in the XML body. This is a legacy testing method and will be deprecated.
+2. As a MessageIdentifier value in the XML header. This is the preferred method and will take the form below:
 
-| Complementary Information    | 	Response                 |
+```
+<urn:Message>
+    <urn:Header>
+      <urn1:MessageSender>token</urn1:MessageSender>
+      <urn1:MessageRecipient>token</urn1:MessageRecipient>
+      <urn1:DateOfPreparation>2008-09-29</urn1:DateOfPreparation>
+      <urn1:TimeOfPreparation>00:18:33</urn1:TimeOfPreparation>
+      <urn1:MessageIdentifier>[MESSAGE IDENTIFIER VALUE]</urn1:MessageIdentifier>
+      <!--Optional:-->
+      <urn1:CorrelationIdentifier>token</urn1:CorrelationIdentifier>
+    </urn:Header>
+</urn:Message>
+```
+You can send the following values to simulate responses:
+
+| MessageIdentifier / ComplementaryInformation value    | 	Response                 |
 |:-----------------------------|:--------------------------|
 | SendA400                     | 400 Bad Request           |
 | SendA404                     | 404 Not Found             |
 | SendA500                     | 500 Internal Server Error |
 | SendA503                     | 503 Service Unavailable   |
 | Any other valid value        | 202 Accepted             |
+
+A success response will have headers and a status, but will contain no body content.
+
+A 400 Bad Request error response will take the form of
+
+```
+{
+  "dateTime": "2021-12-17T09:30:47Z",
+  "message": "Json validation failed",
+  "debugMessage": "user is missing but it is required",
+  "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
+}
+```
+
+A 404 Not Found error response will take the form of
+
+```
+{
+  "dateTime": "2021-12-17T09:30:47Z",
+  "message": "Received error response from server",
+  "debugMessage": "Connection refused; nested exception is java.net.ConnectException: Connection refused",
+  "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
+}
+```
+
+A 500 Internal Server Error response will take the form of
+
+```
+{
+  "dateTime": "2021-12-17T09:30:47Z",
+  "message": "Invalid JSON structure",
+  "debugMessage": "JSON parse error: Unexpected character",
+  "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
+}
+```
+
+A 503 Service Unavailable error response will take the form of
+
+```
+{
+  "dateTime": "2021-12-17T09:30:47Z",
+  "message": "CIRCUIT_BREAKER - 815_CB is OPEN",
+  "debugMessage": "CircuitBreaker '815_CB' is OPEN and does not permit further calls",
+  "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
+}
+```
+
+### All other messages
+
+Below is a list of messages that you can test, along with their relevant XML schema:
+
+| Message | Schema link |
+| --- | --- |
+| IE810 - Cancellation | [IE810 XSD](https://github.com/hmrc/excise-movement-control-system-api/blob/main/app/xsd/ie810.xsd) |
+| IE813 - Change of destination | [IE813 XSD](https://github.com/hmrc/excise-movement-control-system-api/blob/main/app/xsd/ie813.xsd) |
+| IE819 - Alert or rejection of E-AD/E-SAD | [IE819 XSD](https://github.com/hmrc/excise-movement-control-system-api/blob/main/app/xsd/ie819.xsd) |
+| IE837 - Explain delay to delivery | [IE837 XSD](https://github.com/hmrc/excise-movement-control-system-api/blob/main/app/xsd/ie837.xsd) |
+| IE871 - Reason for shortage | [IE871 XSD](https://github.com/hmrc/excise-movement-control-system-api/blob/main/app/xsd/ie871.xsd) |
+
+You will need to provide a request with an XML body that conforms to the relevant XML Schema.
+
+Within the XML header you can activate specific responses by passing in specific MessageIdentifier values, as in the form below:
+
+```
+<urn:Message>
+    <urn:Header>
+      <urn1:MessageSender>token</urn1:MessageSender>
+      <urn1:MessageRecipient>token</urn1:MessageRecipient>
+      <urn1:DateOfPreparation>2008-09-29</urn1:DateOfPreparation>
+      <urn1:TimeOfPreparation>00:18:33</urn1:TimeOfPreparation>
+      <urn1:MessageIdentifier>[MESSAGE IDENTIFIER VALUE]</urn1:MessageIdentifier>
+      <!--Optional:-->
+      <urn1:CorrelationIdentifier>token</urn1:CorrelationIdentifier>
+    </urn:Header>
+</urn:Message>
+```
+
+You can send the following MessageIdentifier values to simulate responses:
+
+
+| MessageIdentifier value     | 	Response                 |
+|:-----------------------------|:--------------------------|
+| SendA400                     | 400 Bad Request           |
+| SendA404                     | 404 Not Found             |
+| SendA500                     | 500 Internal Server Error |
+| SendA503                     | 503 Service Unavailable   |
+| Any other valid value        | 202 Accepted              |
 
 A success response will have headers and a status, but will contain no body content.
 
@@ -229,7 +352,7 @@ lrnie8158366950
 lrnie8157359518
 ```
 
-Any other valid LRN will return no messages.
+You should make sure the example LRNs are copied exactly, and are lowercase. Any other valid LRN will return no messages.
 
 A success response will take the form of 
 
