@@ -133,11 +133,21 @@ Within the query parameters you can send the following excise reference numbers 
 A success response will take the form of 
 
 ```
-{
-"dateTime": "2023-09-07T12:39:20.354Z",
-"exciseRegistrationNumber": "XIWK000467015",
-"message": Base64 encoded XML here
-}
+[
+  {
+    "consignorId": "GBWK002281023",
+    "consigneeId": "GBWKQOZ8OVLYR",
+    "localReferenceNumber": "LRNQA20230909022221",
+    "administrativeReferenceCode": "35WE3B5EDSYSZ86STVKH8",
+    "status": "Accepted"
+  },
+  {
+    "consignorId": "GBWK002281023",
+    "consigneeId": "GBWKQOZ8OVLYQ",
+    "localReferenceNumber": "LRNQA20230909022224",
+    "status": "None"
+  }
+]
 ```
 
 A 422 response will take the form of
@@ -357,9 +367,16 @@ You should make sure the example LRNs are copied exactly, and are lowercase. Any
 A success response will take the form of 
 
 ```
-{
-"dateTime": "2023-09-07T12:39:20.354Z",
-"exciseRegistrationNumber": "XIWK000467015",
-"message": Base64 encoded XML here
-}
+[
+  {
+    "encodedMessage": "PElFODE1PjwhLS0gRXhhbXBsZSBJRTgxNSBtZXNzYWdlIC0tPjwvSUU4MTU+",
+    "createdOn": "2023-10-30T15:36:08.985Z",
+    "type": "IE815"
+  },
+  {
+    "encodedMessage": "PElFODAxPjwhLS0gRXhhbXBsZSBJRTgwMSBtZXNzYWdlIC0tPjwvSUU4MDE+",
+    "createdOn": "2023-10-28T15:36:08.985Z",
+    "type": "IE801"
+  }
+]
 ```
