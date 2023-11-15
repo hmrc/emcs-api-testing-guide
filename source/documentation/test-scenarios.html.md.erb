@@ -11,7 +11,28 @@ You should test the following scenarios to make sure your software is compatible
 
 You should test [this endpoint](/api-documentation/docs/api/service/excise-movement-control-system-api/1.0/oas/page#tag/Movements/operation/submitMovement) first.
 
-To test this endpoint in the External Test environment, you will need to provide a request with an XML body that conforms to the [IE815 XML Schema](https://github.com/hmrc/excise-movement-control-system-api/blob/main/app/xsd/ie815-v16-0.xsd). 
+To test this endpoint in the External Test environment, you will need to provide a request with an XML body that conforms to the [IE815 XML Schema](https://github.com/hmrc/excise-movement-control-system-api/blob/main/app/xsd/ie815-v16-0.xsd). An [IE815 example XML](https://github.com/hmrc/excise-movement-control-system-api/blob/main/resources/public/api/conf/1.0/examples/IE815.xml) can be found on GitHub.
+
+### Get messages
+
+If you also want to test the endpoint ['Get all messages for an excise movement using the localReferenceNumber'](#endpoint-get-all-messages-for-an-excise-movement-using-the-localreferencenumber), you must use one of these LRNs in the body of the XML message:
+
+```
+lrnie8158976912
+lrnie8156540856
+lrnie8155973812
+lrnie8151695045
+lrnie8155743934
+lrnie8154968571
+lrnie8151232757
+lrnie8153786132
+lrnie8158366950
+lrnie8157359518
+```
+
+You should make sure the example LRNs are copied exactly, and are lowercase.
+
+### Error cases
 
 You can activate specific responses by passing in specific values in 2 ways:
 
@@ -178,7 +199,7 @@ You must make sure you have first tested the [Submit a draft excise movement (IE
 
 ### IE818 - Report of receipt
 
-You will need to provide a request with an XML body that conforms to the [IE818 XML Schema](https://github.com/hmrc/excise-movement-control-system-api/blob/main/app/xsd/ie818.xsd).
+You will need to provide a request with an XML body that conforms to the [IE818 XML Schema](https://github.com/hmrc/excise-movement-control-system-api/blob/main/app/xsd/ie818.xsd). An [IE818 example XML](https://github.com/hmrc/excise-movement-control-system-api/blob/main/resources/public/api/conf/1.0/examples/IE818.xml) can be found on GitHub.
 
 You can activate specific responses by passing in specific values in 2 ways:
 
@@ -256,15 +277,15 @@ A 503 Service Unavailable error response will take the form of
 
 ### All other messages
 
-Below is a list of messages that you can test, along with their relevant XML schema:
+Below is a list of messages that you can test, along with their relevant XML schema and example XMLs:
 
-| Message | Schema link |
-| --- | --- |
-| IE810 - Cancellation | [IE810 XSD](https://github.com/hmrc/excise-movement-control-system-api/blob/main/app/xsd/ie810.xsd) |
-| IE813 - Change of destination | [IE813 XSD](https://github.com/hmrc/excise-movement-control-system-api/blob/main/app/xsd/ie813.xsd) |
-| IE819 - Alert or rejection of E-AD/E-SAD | [IE819 XSD](https://github.com/hmrc/excise-movement-control-system-api/blob/main/app/xsd/ie819.xsd) |
-| IE837 - Explain delay to delivery | [IE837 XSD](https://github.com/hmrc/excise-movement-control-system-api/blob/main/app/xsd/ie837.xsd) |
-| IE871 - Reason for shortage | [IE871 XSD](https://github.com/hmrc/excise-movement-control-system-api/blob/main/app/xsd/ie871.xsd) |
+| Message | Schema link | Example XML |
+| --- | --- | --- |
+| IE810 - Cancellation | [IE810 XSD](https://github.com/hmrc/excise-movement-control-system-api/blob/main/app/xsd/ie810.xsd) | [IE810 example XML](https://github.com/hmrc/excise-movement-control-system-api/blob/main/resources/public/api/conf/1.0/examples/IE810.xml) |
+| IE813 - Change of destination | [IE813 XSD](https://github.com/hmrc/excise-movement-control-system-api/blob/main/app/xsd/ie813.xsd) | [IE813 example XML](https://github.com/hmrc/excise-movement-control-system-api/blob/main/resources/public/api/conf/1.0/examples/IE813.xml) |
+| IE819 - Alert or rejection of E-AD/E-SAD | [IE819 XSD](https://github.com/hmrc/excise-movement-control-system-api/blob/main/app/xsd/ie819.xsd) | [IE819 example XML](https://github.com/hmrc/excise-movement-control-system-api/blob/main/resources/public/api/conf/1.0/examples/IE819.xml) |
+| IE837 - Explain delay to delivery | [IE837 XSD](https://github.com/hmrc/excise-movement-control-system-api/blob/main/app/xsd/ie837.xsd) | [IE837 example XML from consignor](https://github.com/hmrc/excise-movement-control-system-api/blob/main/resources/public/api/conf/1.0/examples/IE837_consignor.xml)<br></br>[IE837 example XML from consignee](https://github.com/hmrc/excise-movement-control-system-api/blob/main/resources/public/api/conf/1.0/examples/IE837_consignee.xml) |
+| IE871 - Reason for shortage | [IE871 XSD](https://github.com/hmrc/excise-movement-control-system-api/blob/main/app/xsd/ie871.xsd) | [IE871 example XML](https://github.com/hmrc/excise-movement-control-system-api/blob/main/resources/public/api/conf/1.0/examples/IE810.xml) |
 
 You will need to provide a request with an XML body that conforms to the relevant XML Schema.
 
@@ -343,7 +364,7 @@ A 503 Service Unavailable error response will take the form of
 
 ## Endpoint: Get all messages for an excise movement using the localReferenceNumber
 
-You must make sure you have first tested the [Submit a draft excise movement (IE815) endpoint](#endpoint-submit-a-new-draft-excise-movement), and received a success response.
+You must make sure you have first tested the [Submit a draft excise movement (IE815) endpoint](#endpoint-submit-a-new-draft-excise-movement). You must have used one of the LRNs below in the body of the XML message, and received a success response.
 
 You can test [this endpoint](/api-documentation/docs/api/service/excise-movement-control-system-api/1.0/oas/page#tag/Movements/operation/getAllMessages) in the External Test environment by calling `https://test-api.service.hmrc.gov.uk/customs/excise/movements/{localReferenceNumber}/messages`.
 
