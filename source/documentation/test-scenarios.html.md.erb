@@ -334,20 +334,18 @@ You must make sure you have first tested the [Submit a draft excise movement (IE
 
 You can test [this endpoint](/api-documentation/docs/api/service/excise-movement-control-system-api/1.0/oas/page#tag/Movements/operation/getAllMessages) in the External Test environment by calling `https://test-api.service.hmrc.gov.uk/customs/excise/movements/{localReferenceNumber}/messages`.
 
-If you replace `{localReferenceNumber}` in the URL with one of these LRNs, you will return a success response:
+If you replace `{localReferenceNumber}` in the URL with one of these LRNs, you will can test the following scenarios and message responses:
 
-```
-lrnie8158976912
-lrnie8156540856
-lrnie8155973812
-lrnie8151695045
-lrnie8155743934
-lrnie8154968571
-lrnie8151232757
-lrnie8153786132
-lrnie8158366950
-lrnie8157359518
-```
+| Scenario                           | Local Reference Number (LRN) | Response                                          |
+| ---------------------------------- | ---------------------------- | ------------------------------------------------- |
+| Failed Submission                   |	lrnie8158976912             |	IE704                                             |
+| Successful Submission               |	lrnie8156540856             |	IE801                                             |
+| Happy path delivered                |	lrnie8155973812             |	IE801, IE818                                      |
+| Goods received but rejected         |	lrnie8151695045             |	IE801, IE818, IE871                               |
+| Cancel a movement for an LRN        |	lrnie8155743934             |	IE801, IE810                                      |
+| Change Consignee                    |	lrnie8154968571             |	IE801, IE813, IE801 (Sequence number incremented) |
+| Consignee rejected before sent      |	lrnie8153786132             |	IE801, IE819                                      |
+| Multiple LRN messages with duplicate|	lrnie8155743960             |	IE801, IE819, IE802, IE818, IE810                 |
 
 You should make sure the example LRNs are copied exactly, and are lowercase. Any other valid LRN will return no messages.
 
