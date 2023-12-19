@@ -7,7 +7,7 @@ weight: 40
 <%= partial 'documentation/partials/google_tag_manager_js' %>
 You should test the following scenarios to make sure your software is compatible with EMCS API.
 
-## Endpoint: Submit a new draft excise movement.
+## Endpoint: Submit a new draft excise movement
 
 You should test [this endpoint](/api-documentation/docs/api/service/excise-movement-control-system-api/1.0/oas/page#tag/Movements/operation/submitMovement) first.
 
@@ -367,3 +367,121 @@ A success response will take the form of
   }
 ]
 ```
+
+## Endpoint: Get information relating to an excise trader
+
+You can test [this endpoint]() in the External Test environment by calling `https://test-api.service.hmrc.gov.uk/customs/excise/traders`.
+
+A request takes the form of
+
+```
+{
+  "exciseTraderValidationRequest": {
+      "exciseTraderRequest": {
+          "exciseRegistrationNumber": "GBWK000000206",
+          "entityGroup": "UK Record",
+          "validateProductAuthorisationRequest": [
+              {
+                  "product": {
+                      "exciseProductCode": "W300"
+                  }
+              },
+              {
+                  "product": {
+                      "exciseProductCode": "S200"
+                  }
+              }
+          ]
+      }
+  }
+}
+```
+
+A 200 success response will take the form of
+
+```
+{
+    "exciseTraderValidationResponse": {
+        "validationTimeStamp": "2021-12-17T09:31:12Z",
+        "exciseTraderResponse": {
+            "exciseRegistrationNumber": "GBWK000000206",
+            "entityGroup": "UK Record",
+            "validTrader": true,
+            "traderType": "1",
+            "validateProductAuthorisationResponse": {
+                "valid": true
+            }
+        }
+    }
+}
+```
+
+A 200 Invalid Trader error will take the form of
+
+```
+{
+    "validationTimeStamp": "2021-12-17T09:31:12Z",
+    "exciseTraderResponse": {
+        "exciseRegistrationNumber": "GBWK000000000",
+        "entityGroup": "UK Record",
+        "validTrader": false,
+        "errorCode": "6",
+        "errorText": "Not Found"
+    }
+}
+```
+
+A 200 Invalid Product error will take the form of
+
+```
+{
+    "validationTimeStamp": "2021-12-17T09:31:12Z",
+    "exciseTraderResponse": {
+        "exciseRegistrationNumber": "GBWK000000206",
+        "entityGroup": "UK Record",
+        "validTrader": true,
+        "traderType": "1",
+        "validateProductAuthorisationResponse": {
+            "valid": false,
+            "productError": [
+                {
+                    "exciseProductCode": "W300",
+                    "errorCode": "2",
+                    "errorText": "Unauthorised EPC"
+                }
+            ]
+        }
+    }
+}
+```
+
+A 400 response with no body will occur for the following: 
+
+- invalid request 
+- badly formed JSON 
+- mandatory fields are missing
+- headers are missing. 
+
+Mandatory headers are: 
+
+- Accept
+- Authorization
+- Content-Type
+- DateTime
+- Source
+- X-Correlation-Id
+- X-Forwarded-Id
+
+A 500 response can be triggered to represent internal server errors. This will have no body.
+
+
+The following scenarios can be tested:
+
+| Scenario                     | 	Response                 |
+|:-----------------------------|:--------------------------|
+|Send exciseRegistrationNumber GBWK000000000|	200 with Invalid Trader error|
+|Send exciseProductCode as W300 or S200|	200 with Invalid Product error(s)|
+|Send both the above|	200 with Invalid Trader and Invalid Product errors|
+|Send exciseRegistrationNumber SendA400	|400 Bad Request with no message payload|
+|Send exciseRegistrationNumber SendA500	|500 Internal Server Error with no message payload|
+|Any other valid value|	200 Success with Valid Trader Response|
