@@ -15,7 +15,7 @@ To test this endpoint in the External Test environment, you will need to provide
 
 ### Get messages
 
-If you also want to test the endpoint ['Get all messages for an excise movement using the localReferenceNumber'](#endpoint-get-all-messages-for-an-excise-movement-using-the-localreferencenumber), you must use one of these LRNs in the body of the XML message:
+If you also want to test the endpoint ['Get all messages for an excise movement using the movementId'](#endpoint-get-all-messages-for-an-excise-movement-using-the-localreferencenumber), you must use one of these LRNs in the body of the XML message:
 
 ```
 lrnie8158976912
@@ -68,10 +68,12 @@ A success response will take the form of
 
 ```
 {
-  "consignorId": "GBWK002281023",
-  "consigneeId": "GBWKQOZ8OVLYR",
+  "status": "Accepted",
+  "movementId": "cfdb20c7-d0b0-4b8b-a071-737d68dede5e",
   "localReferenceNumber": "LRNQA20230909022221",
-  "status": "Accepted"
+  "consignorId": "GBWK002281023",
+  "consigneeId": "GBWKQOZ8OVLYR"
+
 }
 ```
 
