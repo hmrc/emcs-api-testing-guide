@@ -357,7 +357,7 @@ You must make sure you have first tested the [Submit a draft excise movement (IE
 You can test [this endpoint](/api-documentation/docs/api/service/excise-movement-control-system-api/1.0/oas/page#tag/Movements/operation/getAllMessages) in the External Test environment by calling `https://test-api.service.hmrc.gov.uk/customs/excise/movements/{movementId}/messages`.
 
 The movementId is returned in response to a draft submission, and is a random unique UUID.
-If you replace `{movementId}` in the URL with the movementID associated with a submission that was made with one of the following LRNs, you will can test the following scenarios and message responses:
+If you replace `{movementId}` in the URL with the movementID associated with a submission that was made with one of the following LRNs in the XML body, you will can test the following scenarios and message responses:
 
 | Scenario                           | Local Reference Number (LRN) | Response                                          |
 | ---------------------------------- | ---------------------------- | ------------------------------------------------- |
@@ -370,7 +370,7 @@ If you replace `{movementId}` in the URL with the movementID associated with a s
 | Consignee rejected before sent      |	lrnie8153786132             |	IE801, IE819                                      |
 | Multiple LRN messages with duplicate|	lrnie8155743960             |	IE801, IE819, IE802, IE818, IE810                 |
 
-You should make sure the example LRNs are copied exactly, and are lowercase when you make the draft submission. Using a movementId that is not associated with a valid LRN will return no messages.
+You should make sure the example LRNs are copied exactly, and are lowercase when you make the XML body for the draft submission. Using a movementId that is not associated with a valid LRN will return no messages.
 
 A success response will take the form of 
 
