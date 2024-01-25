@@ -162,6 +162,24 @@ A success response will take the form of
   }
 ]
 ```
+## Endpoint: Get excise movement
+
+You must make sure you have first tested the [Submit a draft excise movement (IE815) endpoint](#endpoint-submit-a-new-draft-excise-movement), and received a success response.
+
+You can test [this endpoint](/api-documentation/docs/api/service/excise-movement-control-system-api/1.0/oas/page#tag/Movements/operation/getMovement) in the External Test environment by calling `https://test-api.service.hmrc.gov.uk/customs/excise/movements/[YOUR_MOVEMENT_ID]`.
+
+A success response will take the form of
+
+```
+{
+"movementId" : "cfdb20c7-d0b0-4b8b-a071-737d68dede5e",
+"consignorId": "GBWK002281023",
+"localReferenceNumber": "LRNQA20230909022221",
+"consigneeId": "GBWKQOZ8OVLYR",
+"administrativeReferenceCode": "35WE3B5EDSYSZ86STVKH8",
+"status": "Accepted"
+}
+```
 
 ## Endpoint: Submit a message for an excise movement
 
