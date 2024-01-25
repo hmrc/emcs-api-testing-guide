@@ -365,10 +365,10 @@ If you replace `{movementId}` in the URL with the movementID associated with a s
 | Successful Submission               |	lrnie8156540856             |	IE801                                             |
 | Happy path delivered                |	lrnie8155973812             |	IE801, IE818                                      |
 | Goods received but rejected         |	lrnie8151695045             |	IE801, IE818, IE871                               |
-| Cancel a movement for an LRN        |	lrnie8155743934             |	IE801, IE810                                      |
+| Cancel a movement for a movementId  |	lrnie8155743934             |	IE801, IE810                                      |
 | Change Consignee                    |	lrnie8154968571             |	IE801, IE813, IE801 (Sequence number incremented) |
 | Consignee rejected before sent      |	lrnie8153786132             |	IE801, IE819                                      |
-| Multiple LRN messages with duplicate|	lrnie8155743960             |	IE801, IE819, IE802, IE818, IE810                 |
+| Multiple messages with duplicate    |	lrnie8155743960             |	IE801, IE819, IE802, IE818, IE810                 |
 
 You should make sure the example LRNs are copied exactly, and are lowercase when you make the XML body for the draft submission. Using a movementId that is not associated with a valid LRN will return no messages.
 
