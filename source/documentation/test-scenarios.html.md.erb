@@ -15,7 +15,7 @@ To test this endpoint in the External Test environment, you will need to provide
 
 ### Get messages
 
-If you also want to test the endpoint ['Get all messages for an excise movement using the localReferenceNumber'](#endpoint-get-all-messages-for-an-excise-movement-using-the-localreferencenumber), you must use one of these LRNs in the body of the XML message:
+If you also want to test the endpoint ['Get all messages for an excise movement using the movementId'](#endpoint-get-all-messages-for-an-excise-movement-using-the-localreferencenumber), you must use one of these LRNs in the body of the XML message:
 
 ```
 lrnie8158976912
@@ -68,10 +68,12 @@ A success response will take the form of
 
 ```
 {
-  "consignorId": "GBWK002281023",
-  "consigneeId": "GBWKQOZ8OVLYR",
+  "status": "Accepted",
+  "movementId": "cfdb20c7-d0b0-4b8b-a071-737d68dede5e",
   "localReferenceNumber": "LRNQA20230909022221",
-  "status": "Accepted"
+  "consignorId": "GBWK002281023",
+  "consigneeId": "GBWKQOZ8OVLYR"
+
 }
 ```
 
@@ -144,19 +146,39 @@ A success response will take the form of
 ```
 [
   {
+    "movementId" : "cfdb20c7-d0b0-4b8b-a071-737d68dede5e",
     "consignorId": "GBWK002281023",
-    "consigneeId": "GBWKQOZ8OVLYR",
     "localReferenceNumber": "LRNQA20230909022221",
+    "consigneeId": "GBWKQOZ8OVLYR",
     "administrativeReferenceCode": "35WE3B5EDSYSZ86STVKH8",
     "status": "Accepted"
   },
   {
+    "movementId" : "0055d33f-579e-4560-a3ee-03482d8d9dad",
     "consignorId": "GBWK002281023",
     "consigneeId": "GBWKQOZ8OVLYQ",
     "localReferenceNumber": "LRNQA20230909022224",
     "status": "None"
   }
 ]
+```
+## Endpoint: Get excise movement
+
+You must make sure you have first tested the [Submit a draft excise movement (IE815) endpoint](#endpoint-submit-a-new-draft-excise-movement), and received a success response.
+
+You can test [this endpoint](/api-documentation/docs/api/service/excise-movement-control-system-api/1.0/oas/page#tag/Movements/operation/getMovement) in the External Test environment by calling `https://test-api.service.hmrc.gov.uk/customs/excise/movements/[YOUR_MOVEMENT_ID]`.
+
+A success response will take the form of
+
+```
+{
+"movementId" : "cfdb20c7-d0b0-4b8b-a071-737d68dede5e",
+"consignorId": "GBWK002281023",
+"localReferenceNumber": "LRNQA20230909022221",
+"consigneeId": "GBWKQOZ8OVLYR",
+"administrativeReferenceCode": "35WE3B5EDSYSZ86STVKH8",
+"status": "Accepted"
+}
 ```
 
 ## Endpoint: Submit a message for an excise movement
@@ -328,13 +350,14 @@ A 503 Service Unavailable error response will take the form of
 }
 ```
 
-## Endpoint: Get all messages for an excise movement using the localReferenceNumber
+## Endpoint: Get all messages for an excise movement using the movementId
 
 You must make sure you have first tested the [Submit a draft excise movement (IE815) endpoint](#endpoint-submit-a-new-draft-excise-movement) for each LRN in the below scenarios. You must have used one of the LRNs below in the body of the XML message, and received a success response.
 
-You can test [this endpoint](/api-documentation/docs/api/service/excise-movement-control-system-api/1.0/oas/page#tag/Movements/operation/getAllMessages) in the External Test environment by calling `https://test-api.service.hmrc.gov.uk/customs/excise/movements/{localReferenceNumber}/messages`.
+You can test [this endpoint](/api-documentation/docs/api/service/excise-movement-control-system-api/1.0/oas/page#tag/Movements/operation/getAllMessages) in the External Test environment by calling `https://test-api.service.hmrc.gov.uk/customs/excise/movements/{movementId}/messages`.
 
-If you replace `{localReferenceNumber}` in the URL with one of these LRNs, you will can test the following scenarios and message responses:
+The movementId is returned in response to a draft submission, and is a random unique UUID.
+If you replace `{movementId}` in the URL with the movementID associated with a submission that was made with one of the following LRNs in the XML body, you will can test the following scenarios and message responses:
 
 | Scenario                           | Local Reference Number (LRN) | Response                                          |
 | ---------------------------------- | ---------------------------- | ------------------------------------------------- |
@@ -342,12 +365,12 @@ If you replace `{localReferenceNumber}` in the URL with one of these LRNs, you w
 | Successful Submission               |	lrnie8156540856             |	IE801                                             |
 | Happy path delivered                |	lrnie8155973812             |	IE801, IE818                                      |
 | Goods received but rejected         |	lrnie8151695045             |	IE801, IE818, IE871                               |
-| Cancel a movement for an LRN        |	lrnie8155743934             |	IE801, IE810                                      |
+| Cancel a movement for a movementId  |	lrnie8155743934             |	IE801, IE810                                      |
 | Change Consignee                    |	lrnie8154968571             |	IE801, IE813, IE801 (Sequence number incremented) |
 | Consignee rejected before sent      |	lrnie8153786132             |	IE801, IE819                                      |
-| Multiple LRN messages with duplicate|	lrnie8155743960             |	IE801, IE819, IE802, IE818, IE810                 |
+| Multiple messages with duplicate    |	lrnie8155743960             |	IE801, IE819, IE802, IE818, IE810                 |
 
-You should make sure the example LRNs are copied exactly, and are lowercase. Any other valid LRN will return no messages.
+You should make sure the example LRNs are copied exactly, and are lowercase when you make the XML body for the draft submission. Using a movementId that is not associated with a valid LRN will return no messages.
 
 A success response will take the form of 
 
