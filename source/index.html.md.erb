@@ -31,6 +31,35 @@ To allow users to be able to rapidly test the new EMCS API, we have stubbed the 
 
 You can simulate common error responses by sending messages with standard inputs. These are detailed in the [test scenarios](documentation/test-scenarios.html).
 
+## Push pull notification testing
+When testing your software, you can be sent automatic notifications using the Push Pull Notifications API.
+
+This is where notifications from EMCS are sent to your software in near real time.
+
+To get these automatic messages, you must:
+
+- subscribe to the Push Pull Notifications Service
+- subscribe to the Excise Movement Control System (EMCS) API
+- configure the notification URL in the subscription configuration section of Developer Hub
+
+**Note:** if your notification web address is hosted by Amazon Web Services (AWS) then you must either use [edge-optimised custom domain names](https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-edge-optimized-custom-domain-name.html)
+or [regional custom domain names](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-regional-api-custom-domain-create.html).
+
+### How it works
+This diagram shows an example of the process where your service needs to return a 200 HTTP status as part of the automated notification process.
+
+Marc to get diagram from Michael B
+
+### Examples of Push Notification
+
+Example to be added – Marc to action
+
+The following is an example of the push notification showing the link to the messageUri
+
+  ```
+put actual example here
+  ```
+
 ## Related documentation
 
 - [EMCS API service guide](/guides/emcs-api-service-guide/)
