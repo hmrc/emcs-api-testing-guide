@@ -511,22 +511,8 @@ If you replace `{movementId}` and the `{messageId}`in the URL with the respectiv
 
 You should make sure the example LRNs are copied exactly, and are lowercase when you make the XML body for the draft submission. Using a movementId that is not associated with a valid LRN will return no messages.
 
-A success response will take the form of
+A success response will return the message as XML.
 
-```
-[
-  {
-    "encodedMessage": "PElFODE1PjwhLS0gRXhhbXBsZSBJRTgxNSBtZXNzYWdlIC0tPjwvSUU4MTU+",
-    "createdOn": "2023-10-30T15:36:08.985Z",
-    "type": "IE815"
-  },
-  {
-    "encodedMessage": "PElFODAxPjwhLS0gRXhhbXBsZSBJRTgwMSBtZXNzYWdlIC0tPjwvSUU4MDE+",
-    "createdOn": "2023-10-28T15:36:08.985Z",
-    "type": "IE801"
-  }
-]
-```
 
 ## Endpoint: Get information relating to an excise trader
 
