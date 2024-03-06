@@ -26,15 +26,15 @@ You can activate specific responses by passing in specific values in 2 ways:
 
 ```
 <urn:Message>
-    <urn:Header>
-      <urn1:MessageSender>token</urn1:MessageSender>
-      <urn1:MessageRecipient>token</urn1:MessageRecipient>
-      <urn1:DateOfPreparation>2008-09-29</urn1:DateOfPreparation>
-      <urn1:TimeOfPreparation>00:18:33</urn1:TimeOfPreparation>
-      <urn1:MessageIdentifier>[MESSAGE IDENTIFIER VALUE]</urn1:MessageIdentifier>
-      <!--Optional:-->
-      <urn1:CorrelationIdentifier>token</urn1:CorrelationIdentifier>
-    </urn:Header>
+  <urn:Header>
+    <urn1:MessageSender>token</urn1:MessageSender>
+    <urn1:MessageRecipient>token</urn1:MessageRecipient>
+    <urn1:DateOfPreparation>2008-09-29</urn1:DateOfPreparation>
+    <urn1:TimeOfPreparation>00:18:33</urn1:TimeOfPreparation>
+    <urn1:MessageIdentifier>[MESSAGE IDENTIFIER VALUE]</urn1:MessageIdentifier>
+    <!--Optional:-->
+    <urn1:CorrelationIdentifier>token</urn1:CorrelationIdentifier>
+  </urn:Header>
 </urn:Message>
 ```
 
@@ -66,7 +66,7 @@ A 400 Bad Request error response will take the form of
 ```
 {
   "dateTime": "2021-12-17T09:30:47Z",
-    "status": "BAD_REQUEST",
+  "status": "BAD_REQUEST",
   "message": "Json validation failed",
   "debugMessage": "user is missing but it is required",
   "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
@@ -89,19 +89,19 @@ If the XML contains Level 1 or Level 2 validation errors, a 422 Unprocessable En
 
 ```
 {
-    "emcsCorrelationId": "1229482a-b278-49c6-9500-8ba9f883b2b0",
-    "message": [
-        "Validation error(s) occurred"
-    ],
-    "validatorResults": [
-        {
-            "errorCategory": "business",
-            "errorType": 8084,
-            "errorReason": "The Date of Dispatch you entered is incorrect. It must be today or later. Please amend your entry and resubmit.",
-            "errorLocation": "/urn:IE815[1]/urn:Body[1]/urn:SubmittedDraftOfEADESAD[1]/urn:EadEsadDraft[1]/urn:DateOfDispatch[1]",
-            "originalAttributeValue": "2024-03-05"
-        }
-    ]
+  "emcsCorrelationId": "1229482a-b278-49c6-9500-8ba9f883b2b0",
+  "message": [
+    "Validation error(s) occurred"
+  ],
+  "validatorResults": [
+    {
+      "errorCategory": "business",
+      "errorType": 8084,
+      "errorReason": "The Date of Dispatch you entered is incorrect. It must be today or later. Please amend your entry and resubmit.",
+      "errorLocation": "/urn:IE815[1]/urn:Body[1]/urn:SubmittedDraftOfEADESAD[1]/urn:EadEsadDraft[1]/urn:DateOfDispatch[1]",
+      "originalAttributeValue": "2024-03-05"
+    }
+  ]
 }
 ```
 
@@ -165,9 +165,9 @@ A 400 Bad Request will be returned if the query parameters are invalid, and will
 
 ```
 {
-    "dateTime": "2024-03-06T12:09:47.420688Z",
-    "message": "Invalid date format provided in the updatedSince query parameter",
-    "debugMessage": "Date format should be like '2020-11-15T17:02:34.00Z'"
+  "dateTime": "2024-03-06T12:09:47.420688Z",
+  "message": "Invalid date format provided in the updatedSince query parameter",
+  "debugMessage": "Date format should be like '2020-11-15T17:02:34.00Z'"
 }
 ```
 
@@ -182,12 +182,12 @@ A success response will take the form of
 
 ```
 {
-"movementId" : "cfdb20c7-d0b0-4b8b-a071-737d68dede5e",
-"consignorId": "GBWK002281023",
-"localReferenceNumber": "LRNQA20230909022221",
-"consigneeId": "GBWKQOZ8OVLYR",
-"administrativeReferenceCode": "35WE3B5EDSYSZ86STVKH8",
-"status": "Accepted"
+  "movementId" : "cfdb20c7-d0b0-4b8b-a071-737d68dede5e",
+  "consignorId": "GBWK002281023",
+  "localReferenceNumber": "LRNQA20230909022221",
+  "consigneeId": "GBWKQOZ8OVLYR",
+  "administrativeReferenceCode": "35WE3B5EDSYSZ86STVKH8",
+  "status": "Accepted"
 }
 ```
 
@@ -195,9 +195,9 @@ A 400 Bad Request will be returned if the movement ID is an invalid format, and 
 
 ```
 {
-    "dateTime": "2024-03-06T12:10:53.039067Z",
-    "message": "Movement Id format error",
-    "debugMessage": "The movement ID should be a valid UUID"
+  "dateTime": "2024-03-06T12:10:53.039067Z",
+  "message": "Movement Id format error",
+  "debugMessage": "The movement ID should be a valid UUID"
 }
 ```
 
@@ -205,9 +205,9 @@ A 404 Not Found will be returned if the movement does not exist or is not valid 
 
 ```
 {
-    "dateTime": "2024-03-06T12:12:03.658700Z",
-    "message": "Movement not found",
-    "debugMessage": "Movement 22d87934-b05f-49d3-a427-9bbd8441b04b could not be found"
+  "dateTime": "2024-03-06T12:12:03.658700Z",
+  "message": "Movement not found",
+  "debugMessage": "Movement 22d87934-b05f-49d3-a427-9bbd8441b04b could not be found"
 }
 ```
 
@@ -226,15 +226,15 @@ You can activate specific responses by passing in specific values in 2 ways:
 
 ```
 <urn:Message>
-    <urn:Header>
-      <urn1:MessageSender>token</urn1:MessageSender>
-      <urn1:MessageRecipient>token</urn1:MessageRecipient>
-      <urn1:DateOfPreparation>2008-09-29</urn1:DateOfPreparation>
-      <urn1:TimeOfPreparation>00:18:33</urn1:TimeOfPreparation>
-      <urn1:MessageIdentifier>[MESSAGE IDENTIFIER VALUE]</urn1:MessageIdentifier>
-      <!--Optional:-->
-      <urn1:CorrelationIdentifier>token</urn1:CorrelationIdentifier>
-    </urn:Header>
+  <urn:Header>
+    <urn1:MessageSender>token</urn1:MessageSender>
+    <urn1:MessageRecipient>token</urn1:MessageRecipient>
+    <urn1:DateOfPreparation>2008-09-29</urn1:DateOfPreparation>
+    <urn1:TimeOfPreparation>00:18:33</urn1:TimeOfPreparation>
+    <urn1:MessageIdentifier>[MESSAGE IDENTIFIER VALUE]</urn1:MessageIdentifier>
+    <!--Optional:-->
+    <urn1:CorrelationIdentifier>token</urn1:CorrelationIdentifier>
+  </urn:Header>
 </urn:Message>
 ```
 You can send the following values to simulate responses:
@@ -277,19 +277,19 @@ If the XML contains Level 1 or Level 2 validation errors, a 422 Unprocessable En
 
 ```
 {
-    "emcsCorrelationId": "1229482a-b278-49c6-9500-8ba9f883b2b0",
-    "message": [
-        "Validation error(s) occurred"
-    ],
-    "validatorResults": [
-        {
-             "errorCategory": "business",
-             "errorType": 8705,
-             "errorReason": "If the consignee place of delivery trader ID starts with GB then the destination office ID must start with GB. Please amend your entry and resubmit",
-             "errorLocation": "/urn:IE818[1]/urn:Body[1]/urn:AcceptedOrRejectedReportOfReceiptExport[1]/urn:DestinationOffice[1]",
-             "originalAttributeValue": "XI123445"
-         }
-    ]
+  "emcsCorrelationId": "1229482a-b278-49c6-9500-8ba9f883b2b0",
+  "message": [
+    "Validation error(s) occurred"
+  ],
+  "validatorResults": [
+    {
+      "errorCategory": "business",
+      "errorType": 8705,
+      "errorReason": "If the consignee place of delivery trader ID starts with GB then the destination office ID must start with GB. Please amend your entry and resubmit",
+      "errorLocation": "/urn:IE818[1]/urn:Body[1]/urn:AcceptedOrRejectedReportOfReceiptExport[1]/urn:DestinationOffice[1]",
+      "originalAttributeValue": "XI123445"
+     }
+  ]
 }
 ```
 
@@ -336,15 +336,15 @@ Within the XML header you can activate specific responses by passing in specific
 
 ```
 <urn:Message>
-    <urn:Header>
-      <urn1:MessageSender>token</urn1:MessageSender>
-      <urn1:MessageRecipient>token</urn1:MessageRecipient>
-      <urn1:DateOfPreparation>2008-09-29</urn1:DateOfPreparation>
-      <urn1:TimeOfPreparation>00:18:33</urn1:TimeOfPreparation>
-      <urn1:MessageIdentifier>[MESSAGE IDENTIFIER VALUE]</urn1:MessageIdentifier>
-      <!--Optional:-->
-      <urn1:CorrelationIdentifier>token</urn1:CorrelationIdentifier>
-    </urn:Header>
+  <urn:Header>
+    <urn1:MessageSender>token</urn1:MessageSender>
+    <urn1:MessageRecipient>token</urn1:MessageRecipient>
+    <urn1:DateOfPreparation>2008-09-29</urn1:DateOfPreparation>
+    <urn1:TimeOfPreparation>00:18:33</urn1:TimeOfPreparation>
+    <urn1:MessageIdentifier>[MESSAGE IDENTIFIER VALUE]</urn1:MessageIdentifier>
+    <!--Optional:-->
+    <urn1:CorrelationIdentifier>token</urn1:CorrelationIdentifier>
+  </urn:Header>
 </urn:Message>
 ```
 
@@ -389,19 +389,19 @@ If the XML contains Level 1 or Level 2 validation errors, a 422 Unprocessable En
 
 ```
 {
-    "emcsCorrelationId": "1229482a-b278-49c6-9500-8ba9f883b2b0",
-    "message": [
-        "Validation error(s) occurred"
-    ],
-    "validatorResults": [
-        {
-            "errorCategory": "schema",
-            "errorType": 0,
-            "errorReason": "string value 'A' does not match pattern for CancellationReasonCodeType in namespace urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:EMCS:V3.01",
-            "errorLocation": "/urn10:IE810[1]/urn10:Body[1]/urn10:CancellationOfEAD[1]/urn10:Cancellation[1]/urn10:CancellationReasonCode[1]",
-            "originalAttributeValue": "A"
-        }
-    ]
+  "emcsCorrelationId": "1229482a-b278-49c6-9500-8ba9f883b2b0",
+  "message": [
+    "Validation error(s) occurred"
+  ],
+  "validatorResults": [
+    {
+      "errorCategory": "schema",
+      "errorType": 0,
+      "errorReason": "string value 'A' does not match pattern for CancellationReasonCodeType in namespace urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:EMCS:V3.01",
+      "errorLocation": "/urn10:IE810[1]/urn10:Body[1]/urn10:CancellationOfEAD[1]/urn10:Cancellation[1]/urn10:CancellationReasonCode[1]",
+      "originalAttributeValue": "A"
+    }
+  ]
 }
 ```
 
@@ -476,7 +476,6 @@ A success response will take the form of
     "messageType": "IE818",
     "messageId": "XI00008",
     "createdOn": "2023-10-30T15:36:08.985Z"
-
   }
 ]
 ```
@@ -490,22 +489,22 @@ A request takes the form of
 ```
 {
   "exciseTraderValidationRequest": {
-      "exciseTraderRequest": {
-          "exciseRegistrationNumber": "GBWK000000206",
-          "entityGroup": "UK Record",
-          "validateProductAuthorisationRequest": [
-              {
-                  "product": {
-                      "exciseProductCode": "W300"
-                  }
-              },
-              {
-                  "product": {
-                      "exciseProductCode": "S200"
-                  }
-              }
-          ]
-      }
+    "exciseTraderRequest": {
+      "exciseRegistrationNumber": "GBWK000000206",
+      "entityGroup": "UK Record",
+      "validateProductAuthorisationRequest": [
+        {
+          "product": {
+            "exciseProductCode": "W300"
+          }
+        },
+        {
+          "product": {
+            "exciseProductCode": "S200"
+          }
+        }
+      ]
+    }
   }
 }
 ```
@@ -514,18 +513,18 @@ A 200 success response will take the form of
 
 ```
 {
-    "exciseTraderValidationResponse": {
-        "validationTimeStamp": "2021-12-17T09:31:12Z",
-        "exciseTraderResponse": {
-            "exciseRegistrationNumber": "GBWK000000206",
-            "entityGroup": "UK Record",
-            "validTrader": true,
-            "traderType": "1",
-            "validateProductAuthorisationResponse": {
-                "valid": true
-            }
-        }
+  "exciseTraderValidationResponse": {
+    "validationTimeStamp": "2021-12-17T09:31:12Z",
+    "exciseTraderResponse": {
+      "exciseRegistrationNumber": "GBWK000000206",
+      "entityGroup": "UK Record",
+      "validTrader": true,
+      "traderType": "1",
+      "validateProductAuthorisationResponse": {
+        "valid": true
+      }
     }
+  }
 }
 ```
 
@@ -533,14 +532,14 @@ A 200 Invalid Trader error will take the form of
 
 ```
 {
-    "validationTimeStamp": "2021-12-17T09:31:12Z",
-    "exciseTraderResponse": {
-        "exciseRegistrationNumber": "GBWK000000000",
-        "entityGroup": "UK Record",
-        "validTrader": false,
-        "errorCode": "6",
-        "errorText": "Not Found"
-    }
+  "validationTimeStamp": "2021-12-17T09:31:12Z",
+  "exciseTraderResponse": {
+    "exciseRegistrationNumber": "GBWK000000000",
+    "entityGroup": "UK Record",
+    "validTrader": false,
+    "errorCode": "6",
+    "errorText": "Not Found"
+  }
 }
 ```
 
@@ -548,23 +547,23 @@ A 200 Invalid Product error will take the form of
 
 ```
 {
-    "validationTimeStamp": "2021-12-17T09:31:12Z",
-    "exciseTraderResponse": {
-        "exciseRegistrationNumber": "GBWK000000206",
-        "entityGroup": "UK Record",
-        "validTrader": true,
-        "traderType": "1",
-        "validateProductAuthorisationResponse": {
-            "valid": false,
-            "productError": [
-                {
-                    "exciseProductCode": "W300",
-                    "errorCode": "2",
-                    "errorText": "Unauthorised EPC"
-                }
-            ]
+  "validationTimeStamp": "2021-12-17T09:31:12Z",
+  "exciseTraderResponse": {
+    "exciseRegistrationNumber": "GBWK000000206",
+    "entityGroup": "UK Record",
+    "validTrader": true,
+    "traderType": "1",
+    "validateProductAuthorisationResponse": {
+      "valid": false,
+      "productError": [
+        {
+          "exciseProductCode": "W300",
+          "errorCode": "2",
+          "errorText": "Unauthorised EPC"
         }
+      ]
     }
+  }
 }
 ```
 
