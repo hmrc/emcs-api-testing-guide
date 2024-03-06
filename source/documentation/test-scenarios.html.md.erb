@@ -15,22 +15,7 @@ To test this endpoint in the External Test environment, you will need to provide
 
 ### Get messages
 
-If you also want to test the endpoint ['Get all messages for an excise movement using the movementId'](#endpoint-get-all-messages-for-an-excise-movement-using-the-localreferencenumber), you must use one of these LRNs in the body of the XML message:
-
-```
-lrnie8158976912
-lrnie8156540856
-lrnie8155973812
-lrnie8151695045
-lrnie8155743934
-lrnie8154968571
-lrnie8151232757
-lrnie8153786132
-lrnie8158366950
-lrnie8157359518
-```
-
-You should make sure the example LRNs are copied exactly, and are lowercase.
+If you also want to test the endpoint ['Get all messages for an excise movement using the movementId'](#endpoint-get-all-messages-for-an-excise-movement-using-the-movementid), you must use one of these LRNs in that section.
 
 ### Error cases
 
@@ -73,7 +58,6 @@ A success response will take the form of
   "localReferenceNumber": "LRNQA20230909022221",
   "consignorId": "GBWK002281023",
   "consigneeId": "GBWKQOZ8OVLYR"
-
 }
 ```
 
@@ -82,24 +66,10 @@ A 400 Bad Request error response will take the form of
 ```
 {
   "dateTime": "2021-12-17T09:30:47Z",
+    "status": "BAD_REQUEST",
   "message": "Json validation failed",
   "debugMessage": "user is missing but it is required",
   "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
-}
-```
-If the XML is invalid, a 400 Bad Request error response will be returned in the form of
-
-```
-{
-  "message": "Validation error(s) occurred",
-  "errors": [
-    {
-      "errorCode": 8084,
-      "errorMessage": "The Date of Dispatch you entered is incorrect. It must be today or later. Please amend your entry and resubmit.",
-      "location": "/urn:IE815[1]/urn:Body[1]/urn:SubmittedDraftOfEADESAD[1]/urn:EadEsadDraft[1]/urn:DateOfDispatch[1]",
-      "value": "2023-09-09"
-    }
-  ]
 }
 ```
 
@@ -108,17 +78,40 @@ A 404 Not Found error response will take the form of
 ```
 {
   "dateTime": "2021-12-17T09:30:47Z",
+  "status": "NOT_FOUND",
   "message": "Received error response from server",
   "debugMessage": "Connection refused; nested exception is java.net.ConnectException: Connection refused",
   "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
 }
 ```
 
+If the XML contains Level 1 or Level 2 validation errors, a 422 Unprocessable Entity error response will be returned in the form of
+
+```
+{
+    "emcsCorrelationId": "1229482a-b278-49c6-9500-8ba9f883b2b0",
+    "message": [
+        "Validation error(s) occurred"
+    ],
+    "validatorResults": [
+        {
+            "errorCategory": "business",
+            "errorType": 8084,
+            "errorReason": "The Date of Dispatch you entered is incorrect. It must be today or later. Please amend your entry and resubmit.",
+            "errorLocation": "/urn:IE815[1]/urn:Body[1]/urn:SubmittedDraftOfEADESAD[1]/urn:EadEsadDraft[1]/urn:DateOfDispatch[1]",
+            "originalAttributeValue": "2024-03-05"
+        }
+    ]
+}
+```
+
+
 A 500 Internal Server Error response will take the form of
 
 ```
 {
   "dateTime": "2021-12-17T09:30:47Z",
+  "status": "INTERNAL_SERVER_ERROR"
   "message": "Invalid JSON structure",
   "debugMessage": "JSON parse error: Unexpected character",
   "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
@@ -130,16 +123,21 @@ A 503 Service Unavailable error response will take the form of
 ```
 {
   "dateTime": "2021-12-17T09:30:47Z",
+  "status": "SERVICE_UNAVAILABLE"
   "message": "CIRCUIT_BREAKER - 815_CB is OPEN",
   "debugMessage": "CircuitBreaker '815_CB' is OPEN and does not permit further calls",
   "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
 }
 ```
+
+
 ## Endpoint: Get excise movements
 
 You must make sure you have first tested the [Submit a draft excise movement (IE815) endpoint](#endpoint-submit-a-new-draft-excise-movement), and received a success response.
 
-You can test [this endpoint](/api-documentation/docs/api/service/excise-movement-control-system-api/1.0/oas/page#tag/Movements/operation/getAllMovements) in the External Test environment by calling `https://test-api.service.hmrc.gov.uk/customs/excise/movements?lrn=[YOUR_LRN]&ern=[YOUR_ERN]&arc=[YOUR_ARC]`.
+You can test [this endpoint](/api-documentation/docs/api/service/excise-movement-control-system-api/1.0/oas/page#tag/Movements/operation/getAllMovements) in the External Test environment by calling `https://test-api.service.hmrc.gov.uk/customs/excise/movements?lrn=[YOUR_LRN]&ern=[YOUR_ERN]&arc=[YOUR_ARC]&updatedSince=[DATE_TIME]`.
+
+All four query parameters are optional.
 
 A success response will take the form of 
 
@@ -162,6 +160,18 @@ A success response will take the form of
   }
 ]
 ```
+
+A 400 Bad Request will be returned if the query parameters are invalid, and will take the form of
+
+```
+{
+    "dateTime": "2024-03-06T12:09:47.420688Z",
+    "message": "Invalid date format provided in the updatedSince query parameter",
+    "debugMessage": "Date format should be like '2020-11-15T17:02:34.00Z'"
+}
+```
+
+
 ## Endpoint: Get excise movement
 
 You must make sure you have first tested the [Submit a draft excise movement (IE815) endpoint](#endpoint-submit-a-new-draft-excise-movement), and received a success response.
@@ -178,6 +188,26 @@ A success response will take the form of
 "consigneeId": "GBWKQOZ8OVLYR",
 "administrativeReferenceCode": "35WE3B5EDSYSZ86STVKH8",
 "status": "Accepted"
+}
+```
+
+A 400 Bad Request will be returned if the movement ID is an invalid format, and will take the form of
+
+```
+{
+    "dateTime": "2024-03-06T12:10:53.039067Z",
+    "message": "Movement Id format error",
+    "debugMessage": "The movement ID should be a valid UUID"
+}
+```
+
+A 404 Not Found will be returned if the movement does not exist or is not valid for the logged in ERNs, and will take the form of
+
+```
+{
+    "dateTime": "2024-03-06T12:12:03.658700Z",
+    "message": "Movement not found",
+    "debugMessage": "Movement 22d87934-b05f-49d3-a427-9bbd8441b04b could not be found"
 }
 ```
 
@@ -224,6 +254,7 @@ A 400 Bad Request error response will take the form of
 ```
 {
   "dateTime": "2021-12-17T09:30:47Z",
+  "status": "BAD_REQUEST"
   "message": "Json validation failed",
   "debugMessage": "user is missing but it is required",
   "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
@@ -235,17 +266,40 @@ A 404 Not Found error response will take the form of
 ```
 {
   "dateTime": "2021-12-17T09:30:47Z",
+  "status": "NOT_FOUND"
   "message": "Received error response from server",
   "debugMessage": "Connection refused; nested exception is java.net.ConnectException: Connection refused",
   "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
 }
 ```
 
+If the XML contains Level 1 or Level 2 validation errors, a 422 Unprocessable Entity error response will be returned in the form of
+
+```
+{
+    "emcsCorrelationId": "1229482a-b278-49c6-9500-8ba9f883b2b0",
+    "message": [
+        "Validation error(s) occurred"
+    ],
+    "validatorResults": [
+        {
+             "errorCategory": "business",
+             "errorType": 8705,
+             "errorReason": "If the consignee place of delivery trader ID starts with GB then the destination office ID must start with GB. Please amend your entry and resubmit",
+             "errorLocation": "/urn:IE818[1]/urn:Body[1]/urn:AcceptedOrRejectedReportOfReceiptExport[1]/urn:DestinationOffice[1]",
+             "originalAttributeValue": "XI123445"
+         }
+    ]
+}
+```
+
+
 A 500 Internal Server Error response will take the form of
 
 ```
 {
   "dateTime": "2021-12-17T09:30:47Z",
+  "status": "INTERNAL_SERVER_ERROR"
   "message": "Invalid JSON structure",
   "debugMessage": "JSON parse error: Unexpected character",
   "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
@@ -257,6 +311,7 @@ A 503 Service Unavailable error response will take the form of
 ```
 {
   "dateTime": "2021-12-17T09:30:47Z",
+  "status": "SERVICE_UNAVAILABLE"
   "message": "CIRCUIT_BREAKER - 815_CB is OPEN",
   "debugMessage": "CircuitBreaker '815_CB' is OPEN and does not permit further calls",
   "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
@@ -311,6 +366,7 @@ A 400 Bad Request error response will take the form of
 ```
 {
   "dateTime": "2021-12-17T09:30:47Z",
+  "status": "BAD_REQUEST"
   "message": "Json validation failed",
   "debugMessage": "user is missing but it is required",
   "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
@@ -322,9 +378,30 @@ A 404 Not Found error response will take the form of
 ```
 {
   "dateTime": "2021-12-17T09:30:47Z",
+  "status": "NOT_FOUND"
   "message": "Received error response from server",
   "debugMessage": "Connection refused; nested exception is java.net.ConnectException: Connection refused",
   "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
+}
+```
+
+If the XML contains Level 1 or Level 2 validation errors, a 422 Unprocessable Entity error response will be returned in the form of
+
+```
+{
+    "emcsCorrelationId": "1229482a-b278-49c6-9500-8ba9f883b2b0",
+    "message": [
+        "Validation error(s) occurred"
+    ],
+    "validatorResults": [
+        {
+            "errorCategory": "schema",
+            "errorType": 0,
+            "errorReason": "string value 'A' does not match pattern for CancellationReasonCodeType in namespace urn:publicid:-:EC:DGTAXUD:EMCS:PHASE4:EMCS:V3.01",
+            "errorLocation": "/urn10:IE810[1]/urn10:Body[1]/urn10:CancellationOfEAD[1]/urn10:Cancellation[1]/urn10:CancellationReasonCode[1]",
+            "originalAttributeValue": "A"
+        }
+    ]
 }
 ```
 
@@ -333,6 +410,7 @@ A 500 Internal Server Error response will take the form of
 ```
 {
   "dateTime": "2021-12-17T09:30:47Z",
+  "status": "INTERNAL_SERVER_ERROR"
   "message": "Invalid JSON structure",
   "debugMessage": "JSON parse error: Unexpected character",
   "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
@@ -344,6 +422,7 @@ A 503 Service Unavailable error response will take the form of
 ```
 {
   "dateTime": "2021-12-17T09:30:47Z",
+  "status": "SERVICE_UNAVAILABLE"
   "message": "CIRCUIT_BREAKER - 815_CB is OPEN",
   "debugMessage": "CircuitBreaker '815_CB' is OPEN and does not permit further calls",
   "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
@@ -352,23 +431,33 @@ A 503 Service Unavailable error response will take the form of
 
 ## Endpoint: Get all messages for an excise movement using the movementId
 
-You must make sure you have first tested the [Submit a draft excise movement (IE815) endpoint](#endpoint-submit-a-new-draft-excise-movement) for each LRN in the below scenarios. You must have used one of the LRNs below in the body of the XML message, and received a success response.
+To get the stubbed responses for a given scenario using this endpoint you must submit [a draft excise movement (IE815)](#endpoint-submit-a-new-draft-excise-movement) for all the LRNs in that scenario's group.
 
-You can test [this endpoint](/api-documentation/docs/api/service/excise-movement-control-system-api/1.0/oas/page#tag/Movements/operation/getAllMessages) in the External Test environment by calling `https://test-api.service.hmrc.gov.uk/customs/excise/movements/{movementId}/messages`.
+For example, to test the "Good received but rejected" scenario, you would need to submit an IE815 for all the LRNs in grouping A
+
+You can test [this endpoint](/api-documentation/docs/api/service/excise-movement-control-system-api/1.0/oas/page#tag/Movements/operation/getAllMessages) in the External Test environment by calling `https://test-api.service.hmrc.gov.uk/customs/excise/movements/{movementId}/messages?updatedSince=[DATE_TIME]`, where updatedSince is an optional query parameter.
 
 The movementId is returned in response to a draft submission, and is a random unique UUID.
+
 If you replace `{movementId}` in the URL with the movementID associated with a submission that was made with one of the following LRNs in the XML body, you will can test the following scenarios and message responses:
 
-| Scenario                           | Local Reference Number (LRN) | Response                                          |
-| ---------------------------------- | ---------------------------- | ------------------------------------------------- |
-| Failed Submission                   |	lrnie8158976912             |	IE704                                             |
-| Successful Submission               |	lrnie8156540856             |	IE801                                             |
-| Happy path delivered                |	lrnie8155973812             |	IE801, IE818                                      |
-| Goods received but rejected         |	lrnie8151695045             |	IE801, IE818, IE871                               |
-| Cancel a movement for a movementId  |	lrnie8155743934             |	IE801, IE810                                      |
-| Change Consignee                    |	lrnie8154968571             |	IE801, IE813, IE801 (Sequence number incremented) |
-| Consignee rejected before sent      |	lrnie8153786132             |	IE801, IE819                                      |
-| Multiple messages with duplicate    |	lrnie8155743960             |	IE801, IE819, IE802, IE818, IE810                 |
+| Scenario                                | Grouping | Local Reference Number (LRN)        | Response                                                                                                  |
+| --------------------------------------- | -------- | ----------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| Failed Submission                       |	A        | lrnie8158976912                     | IE704                                                                                                     |
+| Successful Submission                   |	A        | lrnie8156540856                     | IE801                                                                                                     |
+| Happy path delivered                    |	A        | lrnie8155973812                     | IE801, IE818                                                                                              |
+| Goods received but rejected             |	A        | lrnie8151695045                     | IE801, IE818, IE871                                                                                       |
+| Cancel a movement for a movementId      |	A        | lrnie8155743934                     | IE801, IE810                                                                                              |
+| Change Consignee                        |	A & B    | lrnie8154968571                     | IE801, IE813, IE801 (Sequence number incremented)                                                         |
+| Consignee rejected before sent          |	B        | lrnie8153786132                     | IE801, IE819                                                                                              |
+| Multiple messages with duplicate        |	B & C    | lrnie8155743960                     | IE801, IE819, IE802, IE818, IE810                                                                         |
+| Movement interrupted                    |	C        | lrnie8155755321                     | IE801, IE807                                                                                              |
+| Event during transit                    |	C        | lrnie8155755323                     | IE801, IE840, IE807                                                                                       |
+| Change of destination                   |	C        | lrnie8155755325                     | IE801, IE803                                                                                              |
+| Goods exported                          |	C & D    | lrnie8155755326<br/>lrnie8155755327 | IE801 (lrnie8155755326), IE801 (lrnie8155755327), IE829, IE818 (lrnie8155755326), IE818 (lrnie8155755327) |
+| Customs rejection                       |	D        | lrnie8155755329                     | IE801, IE839                                                                                              |
+| Manual closure followed by status check |	D        | lrnie8155755330                     | IE801, IE881, IE905                                                                                       |
+
 
 You should make sure the example LRNs are copied exactly, and are lowercase when you make the XML body for the draft submission. Using a movementId that is not associated with a valid LRN will return no messages.
 
@@ -378,13 +467,16 @@ A success response will take the form of
 [
   {
     "encodedMessage": "PElFODE1PjwhLS0gRXhhbXBsZSBJRTgxNSBtZXNzYWdlIC0tPjwvSUU4MTU+",
-    "createdOn": "2023-10-30T15:36:08.985Z",
-    "type": "IE815"
+    "messageType": "IE801",
+    "messageId": "XI00005",
+    "createdOn": "2023-10-30T15:36:08.985Z"
   },
   {
     "encodedMessage": "PElFODAxPjwhLS0gRXhhbXBsZSBJRTgwMSBtZXNzYWdlIC0tPjwvSUU4MDE+",
-    "createdOn": "2023-10-28T15:36:08.985Z",
-    "type": "IE801"
+    "messageType": "IE818",
+    "messageId": "XI00008",
+    "createdOn": "2023-10-30T15:36:08.985Z"
+
   }
 ]
 ```
