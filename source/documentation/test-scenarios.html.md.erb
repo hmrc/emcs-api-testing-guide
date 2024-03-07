@@ -483,7 +483,7 @@ A success response will take the form of
 ## Endpoint: Get a message for an excise movement using the movementId and the messageId
 
 You must make sure you have first tested the [Submit a draft excise movement (IE815) endpoint](#endpoint-submit-a-new-draft-excise-movement) for each LRN in the below scenarios. You must have used one of the LRNs below in the body of the XML message, and received a success response.
-You must then get a messageId. You can get this by calling the [GetAllMessages](#endpoint-get-all-messages-for-an-excise-movement-using-the-movementId) and copy one of the ID returned in the message body.
+You must then get a messageId. You can get this by calling the [GetAllMessages](#endpoint-get-all-messages-for-an-excise-movement-using-the-movementId) and copy one of the message ID returned in the message body.
 
 You can test [this endpoint](/api-documentation/docs/api/service/excise-movement-control-system-api/1.0/oas/page#tag/Movements/operation/getMessage) in the External Test environment by calling `https://test-api.service.hmrc.gov.uk/customs/excise/movements/{movementId}/messages/{messageId}`.
 
@@ -491,8 +491,8 @@ The movementId is returned in response to a draft submission, and is a random un
 
 If you replace `{movementId}` and the `{messageId}`in the URL with the respective movementID associated with a submission that was made with one of the following LRNs in the XML body, and with the messageId belonging to one of the message for an excise movement then you will able to test the following scenarios and message responses:
 
-| Scenario                           | Local Reference Number (LRN) | Message ID                                                     | Response                                                  |
-| ---------------------------------- | ---------------- | -------------------------------------------------------------- |---------------------------------------------------------- |
+| Scenario                            | Local Reference Number (LRN) | Message ID                                                     | Response                                                  |
+| ----------------------------------- | ---------------- | -------------------------------------------------------------- |---------------------------------------------------------- |
 | Failed submission                   |	lrnie8158976912 | XI000001                                                     | IE704                                                     |
 | Successful submission               |	lrnie8156540856 | XI000002                                                     | IE801                                                     |
 | Happy path delivered                |	lrnie8155973812 | XI000003 <br> XI0000015                                      | IE801 <br> IE818                                          |
@@ -504,8 +504,8 @@ If you replace `{movementId}` and the `{messageId}`in the URL with the respectiv
 | Movement interrupted                | lrnie8155755321 | XI000321 <br> GB0023121                                      | IE801 <br> IE807                                          |
 | Event occurs during transit         | lrnie8155755323 | XI000321 <br> XI0003265 <br> GB0023126                       | IE801 <br> IE840 <br> IE807                               |
 | Change of destination               | lrnie8155755325 | XI004321 <br> GB002312688                                    | IE801 <br> IE803                                          |
-| Goods exported                      | lrnie8155755326 | XI004321A <br> XI004321B <br> XI004321C                      | IE801 <br> IE829 <br> IE818                               |
-| Goods exported                      | lrnie8155755327 | XI004321D <br> XI004321B <br> XI004321E                      | IE801 <br> IE829 <br> IE818                               |
+| Goods exported (1)                  | lrnie8155755326 | XI004321A <br> XI004321B <br> XI004321C                      | IE801 <br> IE829 <br> IE818                               |
+| Goods exported (2)                  | lrnie8155755327 | XI004321D <br> XI004321B <br> XI004321E                      | IE801 <br> IE829 <br> IE818                               |
 | Custom rejection                    | lrnie8155755329 | XI004322AB <br> XI004322                                     | IE801 <br> IE839                                          |
 | Manual closure and status response  | lrnie8155755330 | XI004323 <br> XI00432M <br> XI00432RR                        | IE801 <br> IE881 <br> IE905                               |
 
