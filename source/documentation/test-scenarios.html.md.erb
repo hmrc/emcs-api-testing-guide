@@ -465,8 +465,9 @@ A success response will take the form of
 
 ## Endpoint: Get a message for an excise movement using the movementId and the messageId
 
-You must make sure you have first tested the [Submit a draft excise movement (IE815) endpoint](#endpoint-submit-a-new-draft-excise-movement) for each LRN in the below scenarios. You must have used one of the LRNs below in the body of the XML message, and received a success response.
-You must then get a messageId. You can get this by calling the [GetAllMessages](#endpoint-get-all-messages-for-an-excise-movement-using-the-movementId) and copy one of the message ID returned in the message body.
+To get the stubbed responses for a given scenario using this endpoint you must submit [a draft excise movement (IE815)](#endpoint-submit-a-new-draft-excise-movement) for all the LRNs in that scenario's group.
+
+For example, to test the "Good received but rejected" scenario, you would need to submit an IE815 for all the LRNs in grouping A
 
 You can test [this endpoint](/api-documentation/docs/api/service/excise-movement-control-system-api/1.0/oas/page#tag/Movements/operation/getMessage) in the External Test environment by calling `https://test-api.service.hmrc.gov.uk/customs/excise/movements/{movementId}/messages/{messageId}`.
 
@@ -475,7 +476,7 @@ The movementId is returned in response to a draft submission, and is a random un
 If you replace `{movementId}` and the `{messageId}`in the URL with the respective movementID associated with a submission that was made with one of the following LRNs in the XML body, and with the messageId belonging to one of the message for an excise movement then you will able to test the scenarios and message responses in this [table](#get-messages-test-scenarios).
 
 
-You should make sure the example LRNs are copied exactly, and are lowercase when you make the XML body for the draft submission. Using a movementId that is not associated with a valid LRN will return no messages.
+You should make sure the example LRNs are copied exactly, and are lowercase when you make the XML body for the draft submission. Using a movementId that is not associated with a valid LRN will return a not found error.
 
 A success response will return the message as XML.
 
