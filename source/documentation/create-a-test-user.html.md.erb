@@ -5,15 +5,6 @@ weight: 20
 
 # Create a Test User
 <%= partial 'documentation/partials/google_tag_manager_js' %>
-You must create a separate Test User for EMCS API. You should not use a Test User that you have created for other API services.
-
-## Excise Number
-
-The Create Test User API does not currently include an Excise Number field. This is in development, and will be included in a future release.
-
-In the meantime, you should use the `eoriNumber` field in the body of the request to enter an Excise Number. This replaces the Economic Operators Registration and Identification (EORI) number.
-
-If you have previously created a Test User with an EORI number you will not be able to use them to test EMCS API, and must follow the process below.
 
 ## Process
 
@@ -33,7 +24,7 @@ You should follow these steps to generate a Test User:
 5. Copy that token
 6. In the body of the request
     1. Use serviceNames: “excise-movement-control-system”
-    2. For eoriNumber: use the Test User’s Excise ID - e.g. consignor ID, consignee ID or warehousekeeper ID
+    2. For exciseNumber: use the Test User’s Excise ID - e.g. consignor ID, consignee ID or warehouse keeper ID
 
     For example:
 
@@ -47,7 +38,7 @@ You should follow these steps to generate a Test User:
       "serviceNames": [
         "excise-movement-control-system"
       ],
-      "eoriNumber": "[YOUR-EXCISE-NUMBER]"
+      "exciseNumber": "[YOUR-EXCISE-NUMBER]"
     }
     ```
 7. A successful response will return a Test User’s details. Take a note of the user ID and the password for the next step in the [testing process](testing-process.html).
