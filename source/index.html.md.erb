@@ -36,19 +36,24 @@ When testing your software, you can be sent automatic notifications using the Pu
 
 This is where notifications from EMCS are sent to your software in near real time.
 
+Only the consignor will receive Push Pull Notifications from the service
+
 To get these automatic messages, you must:
 
-- subscribe to the Push Pull Notifications Service
+- subscribe to the [Push Pull Notifications Service](https://developer.service.hmrc.gov.uk/api-documentation/docs/api/service/push-pull-notifications-api/1.0)
 - subscribe to the Excise Movement Control System (EMCS) API
 - configure the notification URL in the subscription configuration section of Developer Hub
 
-**Note:** if your notification web address is hosted by Amazon Web Services (AWS) then you must either use [edge-optimised custom domain names](https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-edge-optimized-custom-domain-name.html)
+Already subscribed to the EMCS API?
+
+You will need to set up a Push Pull Notification API BoxID to receive the notifications.
+To do this go to the Manage API subscriptions page for your application in the Developer Hub.
+Go to the section Excise Movement Control System, and simply toggle from Yes to No then back to Yes.
+
+**Note:**
+if your notification web address is hosted by Amazon Web Services (AWS) then you must either use [edge-optimised custom domain names](https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-edge-optimized-custom-domain-name.html)
 or [regional custom domain names](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-regional-api-custom-domain-create.html).
 
-### How it works
-This diagram shows an example of the process where your service needs to return a 200 HTTP status as part of the automated notification process.
-
-Marc to get diagram from Michael B
 
 ### Examples of Push Notification
 
