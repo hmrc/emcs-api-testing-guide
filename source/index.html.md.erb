@@ -19,7 +19,7 @@ You must complete the following steps before testing the API.
 4. Obtain your [Client ID and Client secret credentials](https://developer.service.hmrc.gov.uk/api-documentation/docs/authorisation/credentials).
 5. Use the [Create Test User API](https://developer.service.hmrc.gov.uk/api-documentation/docs/api/service/api-platform-test-user/1.0) to create one or more test users for your sandbox application. 
 
-## Testing your software.
+## Testing your software
 
 1. Test the [authorisation process](https://developer.service.hmrc.gov.uk/api-documentation/docs/authorisation/user-restricted-endpoints).
 2. Use your application to make calls to our stubbed test API in the [testing process](documentation/testing-process).
@@ -36,7 +36,7 @@ When testing your software, you can be sent automatic notifications using the Pu
 
 This is where notifications from EMCS are sent to your software in near real time.
 
-Only the consignor will receive Push Pull Notifications from the service
+Only the consignor will receive Push Pull Notifications from the service.
 
 To get these automatic messages, you must:
 
@@ -57,13 +57,26 @@ or [regional custom domain names](https://docs.aws.amazon.com/apigateway/latest/
 
 ### Examples of Push Notification
 
-Example to be added – Marc to action
-
 The following is an example of the push notification showing the link to the messageUri
 
-  ```
-put actual example here
-  ```
+```
+{
+    "notificationId": "c7f5b4bb-15b8-4805-bde0-fec4e3499af5",
+    "boxId": "aa57010f-a349-4169-82fb-d3571097b380",
+    "messageContentType": "application/json",
+    "message": "{
+        \"movementId\":\"4d543312-c043-4257-b617-2ac52594001d\",
+        \"messageUri\":\"/movements/4d543312-c043-4257-b617-2ac52594001d/messages/GB100000000305228\",
+        \"messageId\":\"GB100000000305228\",
+        \"consignor\":\"XIWK714220000\",
+        \"consignee\":\"XIWK714220000\",
+        \"arc\":\"24GB00000000000385976\",
+        \"ern\":\"XIWK714220000\"
+        }",
+    "status": "PENDING",
+    "createdDateTime": "2024-03-15T16:12:14.645+0000"
+}
+```
 
 ## Related documentation
 
