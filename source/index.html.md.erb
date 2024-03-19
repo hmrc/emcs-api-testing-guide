@@ -19,7 +19,7 @@ You must complete the following steps before testing the API.
 4. Obtain your [Client ID and Client secret credentials](https://developer.service.hmrc.gov.uk/api-documentation/docs/authorisation/credentials).
 5. Use the [Create Test User API](https://developer.service.hmrc.gov.uk/api-documentation/docs/api/service/api-platform-test-user/1.0) to create one or more test users for your sandbox application. 
 
-## Testing your software.
+## Testing your software
 
 1. Test the [authorisation process](https://developer.service.hmrc.gov.uk/api-documentation/docs/authorisation/user-restricted-endpoints).
 2. Use your application to make calls to our stubbed test API in the [testing process](documentation/testing-process).
@@ -30,6 +30,53 @@ You must complete the following steps before testing the API.
 To allow users to be able to rapidly test the new EMCS API, we have stubbed the back end. To act as a realistic representation of the production API, the stub provides the same validation for level 1 and level 2 validation as the production API will. It does not provide level 3 validation.
 
 You can simulate common error responses by sending messages with standard inputs. These are detailed in the [test scenarios](documentation/test-scenarios.html).
+
+## Push pull notification testing
+When testing your software, you can be sent automatic notifications using the Push Pull Notifications API.
+
+This is where notifications from EMCS are sent to your software in near real time.
+
+Only the consignor will receive Push Pull Notifications from the service.
+
+To get these automatic messages, you must:
+
+- subscribe to the [Push Pull Notifications Service](https://developer.service.hmrc.gov.uk/api-documentation/docs/api/service/push-pull-notifications-api/1.0)
+- subscribe to the Excise Movement Control System (EMCS) API
+- configure the notification URL in the subscription configuration section of Developer Hub
+
+Already subscribed to the EMCS API?
+
+You will need to set up a Push Pull Notification API BoxID to receive the notifications.
+To do this go to the Manage API subscriptions page for your application in the Developer Hub.
+Go to the section Excise Movement Control System, and simply toggle from Yes to No then back to Yes.
+
+**Note:**
+if your notification web address is hosted by Amazon Web Services (AWS) then you must either use [edge-optimised custom domain names](https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-edge-optimized-custom-domain-name.html)
+or [regional custom domain names](https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-regional-api-custom-domain-create.html).
+
+
+### Examples of Push Notification
+
+The following is an example of the push notification showing the link to the messageUri
+
+```
+{
+    "notificationId": "c7f5b4bb-15b8-4805-bde0-fec4e3499af5",
+    "boxId": "aa57010f-a349-4169-82fb-d3571097b380",
+    "messageContentType": "application/json",
+    "message": "{
+        \"movementId\":\"4d543312-c043-4257-b617-2ac52594001d\",
+        \"messageUri\":\"/movements/4d543312-c043-4257-b617-2ac52594001d/messages/GB100000000305228\",
+        \"messageId\":\"GB100000000305228\",
+        \"consignor\":\"XIWK714220000\",
+        \"consignee\":\"XIWK714220000\",
+        \"arc\":\"24GB00000000000385976\",
+        \"ern\":\"XIWK714220000\"
+        }",
+    "status": "PENDING",
+    "createdDateTime": "2024-03-15T16:12:14.645+0000"
+}
+```
 
 ## Related documentation
 
