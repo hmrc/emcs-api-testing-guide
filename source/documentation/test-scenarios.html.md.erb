@@ -53,7 +53,6 @@ A success response will take the form of
 
 ```
 {
-  "status": "Accepted",
   "boxId": "4e56b0da-63bf-439d-98d4-22bf7d12f098",
   "movementId": "cfdb20c7-d0b0-4b8b-a071-737d68dede5e",
   "localReferenceNumber": "LRNQA20230909022221",
@@ -67,7 +66,6 @@ A 400 Bad Request error response will take the form of
 ```
 {
   "dateTime": "2021-12-17T09:30:47Z",
-  "status": "BAD_REQUEST",
   "message": "Json validation failed",
   "debugMessage": "user is missing but it is required",
   "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
@@ -79,7 +77,6 @@ A 404 Not Found error response will take the form of
 ```
 {
   "dateTime": "2021-12-17T09:30:47Z",
-  "status": "NOT_FOUND",
   "message": "Received error response from server",
   "debugMessage": "Connection refused; nested exception is java.net.ConnectException: Connection refused",
   "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
@@ -112,7 +109,6 @@ A 500 Internal Server Error response will take the form of
 ```
 {
   "dateTime": "2021-12-17T09:30:47Z",
-  "status": "INTERNAL_SERVER_ERROR"
   "message": "Invalid JSON structure",
   "debugMessage": "JSON parse error: Unexpected character",
   "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
@@ -124,7 +120,6 @@ A 503 Service Unavailable error response will take the form of
 ```
 {
   "dateTime": "2021-12-17T09:30:47Z",
-  "status": "SERVICE_UNAVAILABLE"
   "message": "CIRCUIT_BREAKER - 815_CB is OPEN",
   "debugMessage": "CircuitBreaker '815_CB' is OPEN and does not permit further calls",
   "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
@@ -150,14 +145,12 @@ A success response will take the form of
     "localReferenceNumber": "LRNQA20230909022221",
     "consigneeId": "GBWKQOZ8OVLYR",
     "administrativeReferenceCode": "35WE3B5EDSYSZ86STVKH8",
-    "status": "Accepted"
   },
   {
     "movementId" : "0055d33f-579e-4560-a3ee-03482d8d9dad",
     "consignorId": "GBWK002281023",
     "consigneeId": "GBWKQOZ8OVLYQ",
     "localReferenceNumber": "LRNQA20230909022224",
-    "status": "None"
   }
 ]
 ```
@@ -188,7 +181,6 @@ A success response will take the form of
   "localReferenceNumber": "LRNQA20230909022221",
   "consigneeId": "GBWKQOZ8OVLYR",
   "administrativeReferenceCode": "35WE3B5EDSYSZ86STVKH8",
-  "status": "Accepted"
 }
 ```
 
@@ -255,7 +247,6 @@ A 400 Bad Request error response will take the form of
 ```
 {
   "dateTime": "2021-12-17T09:30:47Z",
-  "status": "BAD_REQUEST"
   "message": "Json validation failed",
   "debugMessage": "user is missing but it is required",
   "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
@@ -267,7 +258,6 @@ A 404 Not Found error response will take the form of
 ```
 {
   "dateTime": "2021-12-17T09:30:47Z",
-  "status": "NOT_FOUND"
   "message": "Received error response from server",
   "debugMessage": "Connection refused; nested exception is java.net.ConnectException: Connection refused",
   "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
@@ -300,7 +290,6 @@ A 500 Internal Server Error response will take the form of
 ```
 {
   "dateTime": "2021-12-17T09:30:47Z",
-  "status": "INTERNAL_SERVER_ERROR"
   "message": "Invalid JSON structure",
   "debugMessage": "JSON parse error: Unexpected character",
   "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
@@ -312,7 +301,6 @@ A 503 Service Unavailable error response will take the form of
 ```
 {
   "dateTime": "2021-12-17T09:30:47Z",
-  "status": "SERVICE_UNAVAILABLE"
   "message": "CIRCUIT_BREAKER - 815_CB is OPEN",
   "debugMessage": "CircuitBreaker '815_CB' is OPEN and does not permit further calls",
   "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
@@ -367,7 +355,6 @@ A 400 Bad Request error response will take the form of
 ```
 {
   "dateTime": "2021-12-17T09:30:47Z",
-  "status": "BAD_REQUEST"
   "message": "Json validation failed",
   "debugMessage": "user is missing but it is required",
   "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
@@ -379,7 +366,6 @@ A 404 Not Found error response will take the form of
 ```
 {
   "dateTime": "2021-12-17T09:30:47Z",
-  "status": "NOT_FOUND"
   "message": "Received error response from server",
   "debugMessage": "Connection refused; nested exception is java.net.ConnectException: Connection refused",
   "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
@@ -411,7 +397,6 @@ A 500 Internal Server Error response will take the form of
 ```
 {
   "dateTime": "2021-12-17T09:30:47Z",
-  "status": "INTERNAL_SERVER_ERROR"
   "message": "Invalid JSON structure",
   "debugMessage": "JSON parse error: Unexpected character",
   "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
@@ -423,7 +408,6 @@ A 503 Service Unavailable error response will take the form of
 ```
 {
   "dateTime": "2021-12-17T09:30:47Z",
-  "status": "SERVICE_UNAVAILABLE"
   "message": "CIRCUIT_BREAKER - 815_CB is OPEN",
   "debugMessage": "CircuitBreaker '815_CB' is OPEN and does not permit further calls",
   "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
