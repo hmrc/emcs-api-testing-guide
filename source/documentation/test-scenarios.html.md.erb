@@ -240,7 +240,17 @@ You can send the following values to simulate responses:
 | SendA503                     | 503 Service Unavailable   |
 | Any other valid value        | 202 Accepted             |
 
-A success response will have headers and a status, but will contain no body content.
+A 202 success response will take the form of
+
+```
+{
+  "movementId": "cfdb20c7-d0b0-4b8b-a071-737d68dede5e",
+  "localReferenceNumber": "LRNQA20230909022221",
+  "consignorId": "GBWK002281023",
+  "consigneeId": "GBWKQOZ8OVLYR",
+  "administrativeReferenceCode": "35WE3B5EDSYSZ86STVKH8"
+}
+```
 
 A 400 Bad Request error response will take the form of
 
@@ -348,7 +358,17 @@ You can send the following MessageIdentifier values to simulate responses:
 | SendA503                     | 503 Service Unavailable   |
 | Any other valid value        | 202 Accepted              |
 
-A success response will have headers and a status, but will contain no body content.
+A 202 success response will take the form of
+
+```
+{
+  "movementId": "cfdb20c7-d0b0-4b8b-a071-737d68dede5e",
+  "localReferenceNumber": "LRNQA20230909022221",
+  "consignorId": "GBWK002281023",
+  "consigneeId": "GBWKQOZ8OVLYR",
+  "administrativeReferenceCode": "35WE3B5EDSYSZ86STVKH8"
+}
+```
 
 A 400 Bad Request error response will take the form of
 
