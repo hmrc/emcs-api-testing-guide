@@ -53,8 +53,8 @@ A success response will take the form of
 
 ```
 {
-  "boxId": "4e56b0da-63bf-439d-98d4-22bf7d12f098",
   "movementId": "cfdb20c7-d0b0-4b8b-a071-737d68dede5e",
+  "boxId": "4e56b0da-63bf-439d-98d4-22bf7d12f098",
   "localReferenceNumber": "LRNQA20230909022221",
   "consignorId": "GBWK002281023",
   "consigneeId": "GBWKQOZ8OVLYR"
@@ -68,7 +68,7 @@ A 400 Bad Request error response will take the form of
   "dateTime": "2021-12-17T09:30:47Z",
   "message": "Json validation failed",
   "debugMessage": "user is missing but it is required",
-  "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
+  "correlationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
 }
 ```
 
@@ -79,7 +79,7 @@ A 404 Not Found error response will take the form of
   "dateTime": "2021-12-17T09:30:47Z",
   "message": "Received error response from server",
   "debugMessage": "Connection refused; nested exception is java.net.ConnectException: Connection refused",
-  "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
+  "correlationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
 }
 ```
 
@@ -87,10 +87,10 @@ If the XML contains Level 1 or Level 2 validation errors, a 422 Unprocessable En
 
 ```
 {
-  "emcsCorrelationId": "1229482a-b278-49c6-9500-8ba9f883b2b0",
-  "message": [
-    "Validation error(s) occurred"
-  ],
+  "dateTime": '2021-12-17T09:31:12Z'
+  "message": "Validation error"
+  "debugMessage": "Validation error(s) occurred"
+  "correlationId": "1229482a-b278-49c6-9500-8ba9f883b2b0",
   "validatorResults": [
     {
       "errorCategory": "business",
@@ -111,7 +111,7 @@ A 500 Internal Server Error response will take the form of
   "dateTime": "2021-12-17T09:30:47Z",
   "message": "Invalid JSON structure",
   "debugMessage": "JSON parse error: Unexpected character",
-  "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
+  "correlationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
 }
 ```
 
@@ -122,7 +122,7 @@ A 503 Service Unavailable error response will take the form of
   "dateTime": "2021-12-17T09:30:47Z",
   "message": "CIRCUIT_BREAKER - 815_CB is OPEN",
   "debugMessage": "CircuitBreaker '815_CB' is OPEN and does not permit further calls",
-  "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
+  "correlationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
 }
 ```
 
@@ -249,7 +249,7 @@ A 400 Bad Request error response will take the form of
   "dateTime": "2021-12-17T09:30:47Z",
   "message": "Json validation failed",
   "debugMessage": "user is missing but it is required",
-  "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
+  "correlationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
 }
 ```
 
@@ -260,7 +260,7 @@ A 404 Not Found error response will take the form of
   "dateTime": "2021-12-17T09:30:47Z",
   "message": "Received error response from server",
   "debugMessage": "Connection refused; nested exception is java.net.ConnectException: Connection refused",
-  "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
+  "correlationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
 }
 ```
 
@@ -268,10 +268,10 @@ If the XML contains Level 1 or Level 2 validation errors, a 422 Unprocessable En
 
 ```
 {
-  "emcsCorrelationId": "1229482a-b278-49c6-9500-8ba9f883b2b0",
-  "message": [
-    "Validation error(s) occurred"
-  ],
+  "dateTime": '2021-12-17T09:31:12Z'
+  "message": "Validation error"
+  "debugMessage": "Validation error(s) occurred"
+  "correlationId": "1229482a-b278-49c6-9500-8ba9f883b2b0",
   "validatorResults": [
     {
       "errorCategory": "business",
@@ -292,7 +292,7 @@ A 500 Internal Server Error response will take the form of
   "dateTime": "2021-12-17T09:30:47Z",
   "message": "Invalid JSON structure",
   "debugMessage": "JSON parse error: Unexpected character",
-  "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
+  "correlationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
 }
 ```
 
@@ -303,7 +303,7 @@ A 503 Service Unavailable error response will take the form of
   "dateTime": "2021-12-17T09:30:47Z",
   "message": "CIRCUIT_BREAKER - 815_CB is OPEN",
   "debugMessage": "CircuitBreaker '815_CB' is OPEN and does not permit further calls",
-  "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
+  "correlationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
 }
 ```
 
@@ -357,7 +357,7 @@ A 400 Bad Request error response will take the form of
   "dateTime": "2021-12-17T09:30:47Z",
   "message": "Json validation failed",
   "debugMessage": "user is missing but it is required",
-  "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
+  "correlationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
 }
 ```
 
@@ -368,7 +368,7 @@ A 404 Not Found error response will take the form of
   "dateTime": "2021-12-17T09:30:47Z",
   "message": "Received error response from server",
   "debugMessage": "Connection refused; nested exception is java.net.ConnectException: Connection refused",
-  "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
+  "correlationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
 }
 ```
 
@@ -376,10 +376,10 @@ If the XML contains Level 1 or Level 2 validation errors, a 422 Unprocessable En
 
 ```
 {
-  "emcsCorrelationId": "1229482a-b278-49c6-9500-8ba9f883b2b0",
-  "message": [
-    "Validation error(s) occurred"
-  ],
+  "dateTime": '2021-12-17T09:31:12Z'
+  "message": "Validation error"
+  "debugMessage": "Validation error(s) occurred"
+  "correlationId": "1229482a-b278-49c6-9500-8ba9f883b2b0",
   "validatorResults": [
     {
       "errorCategory": "schema",
@@ -399,7 +399,7 @@ A 500 Internal Server Error response will take the form of
   "dateTime": "2021-12-17T09:30:47Z",
   "message": "Invalid JSON structure",
   "debugMessage": "JSON parse error: Unexpected character",
-  "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
+  "correlationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
 }
 ```
 
@@ -410,7 +410,7 @@ A 503 Service Unavailable error response will take the form of
   "dateTime": "2021-12-17T09:30:47Z",
   "message": "CIRCUIT_BREAKER - 815_CB is OPEN",
   "debugMessage": "CircuitBreaker '815_CB' is OPEN and does not permit further calls",
-  "emcsCorrelationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
+  "correlationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
 }
 ```
 
@@ -499,61 +499,53 @@ A 200 success response will take the form of
 
 ```
 {
-  "exciseTraderValidationResponse": {
     "validationTimeStamp": "2021-12-17T09:31:12Z",
-    "exciseTraderResponse": {
-      "exciseRegistrationNumber": "GBWK000000206",
-      "entityGroup": "UK Record",
-      "validTrader": true,
-      "traderType": "1",
-      "validateProductAuthorisationResponse": {
-        "valid": true
-      }
-    }
-  }
-}
-```
-
-A 200 Invalid Trader error will take the form of
-
-```
-{
-  "validationTimeStamp": "2021-12-17T09:31:12Z",
-  "exciseTraderResponse": {
-    "exciseRegistrationNumber": "GBWK000000000",
-    "entityGroup": "UK Record",
-    "validTrader": false,
-    "errorCode": "6",
-    "errorText": "Not Found"
-  }
-}
-```
-
-A 200 Invalid Product error will take the form of
-
-```
-{
-  "validationTimeStamp": "2021-12-17T09:31:12Z",
-  "exciseTraderResponse": {
     "exciseRegistrationNumber": "GBWK000000206",
     "entityGroup": "UK Record",
     "validTrader": true,
     "traderType": "1",
     "validateProductAuthorisationResponse": {
-      "valid": false,
-      "productError": [
-        {
-          "exciseProductCode": "W300",
-          "errorCode": "2",
-          "errorText": "Unauthorised EPC"
-        }
-      ]
+        "valid": true
     }
-  }
 }
 ```
 
-A 400 response with no body will occur for the following: 
+A 200 Invalid Trader response will take the form of
+
+```
+{
+    "validationTimeStamp": "2021-12-17T09:31:12Z",
+    "exciseRegistrationNumber": "GBWK000000000",
+    "entityGroup": "UK Record",
+    "validTrader": false,
+    "errorCode": "6",
+    "errorText": "Not Found"
+}
+```
+
+A 200 Invalid Product response will take the form of
+
+```
+{
+    "validationTimeStamp": "2021-12-17T09:31:12Z",
+    "exciseRegistrationNumber": "GBWK000000206",
+    "entityGroup": "UK Record",
+    "validTrader": true,
+    "traderType": "1",
+    "validateProductAuthorisationResponse": {
+        "valid": false,
+        "productError": [
+            {
+                "exciseProductCode": "W300",
+                "errorCode": "2",
+                "errorText": "Unauthorised EPC"
+            }
+        ]
+    }
+}
+```
+
+A 400 Bad Request error will occur for the following:
 
 - invalid request 
 - badly formed JSON 
@@ -570,8 +562,27 @@ Mandatory headers are:
 - X-Correlation-Id
 - X-Forwarded-Id
 
-A 500 response can be triggered to represent internal server errors. This will have no body.
+A 400 Bad Request error will take the form of
 
+```
+{
+  "dateTime": "2021-12-17T09:30:47Z",
+  "message": "PreValidateTrader error",
+  "debugMessage": "Error occurred during PreValidateTrader request",
+  "correlationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
+}
+```
+
+A 500 Internal Server Error response can be triggered to represent internal server errors. It will take the form of
+
+```
+{
+  "dateTime": "2021-12-17T09:30:47Z",
+  "message": "Invalid JSON structure",
+  "debugMessage": "JSON parse error: Unexpected character",
+  "correlationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
+}
+```
 
 The following scenarios can be tested:
 
