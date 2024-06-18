@@ -436,9 +436,6 @@ A 503 Service Unavailable error response will take the form of
 
 ## Endpoint: Get all messages for an excise movement using the movementId
 
-To get the stubbed responses for a given scenario using this endpoint you must submit [a draft excise movement (IE815)](#endpoint-submit-a-new-draft-excise-movement) for all the LRNs in that scenario's group.
-
-For example, to test the "Good received but rejected" scenario, you would need to submit an IE815 for all the LRNs in grouping A
 
 You can test [this endpoint](/api-documentation/docs/api/service/excise-movement-control-system-api/1.0/oas/page#tag/Movements/operation/getAllMessages) in the External Test environment by calling `https://test-api.service.hmrc.gov.uk/customs/excise/movements/{movementId}/messages?updatedSince=[DATE_TIME]`, where updatedSince is an optional query parameter.
 
@@ -470,10 +467,6 @@ A success response will take the form of
 
 ## Endpoint: Get a message for an excise movement using the movementId and the messageId
 
-To get the stubbed responses for a given scenario using this endpoint you must submit [a draft excise movement (IE815)](#endpoint-submit-a-new-draft-excise-movement) for all the LRNs in that scenario's group.
-
-For example, to test the "Good received but rejected" scenario, you would need to submit an IE815 for all the LRNs in grouping A
-
 You can test [this endpoint](/api-documentation/docs/api/service/excise-movement-control-system-api/1.0/oas/page#tag/Movements/operation/getMessage) in the External Test environment by calling `https://test-api.service.hmrc.gov.uk/customs/excise/movements/{movementId}/messages/{messageId}`.
 
 The movementId is returned in response to a draft submission, and is a random unique UUID.
@@ -488,7 +481,10 @@ A success response will return the message as XML.
 
 ## Endpoint: Get information relating to an excise trader
 
+
 You can test [this endpoint]() in the External Test environment by calling `https://test-api.service.hmrc.gov.uk/customs/excise/traders`.
+
+There is a limit of 10 product codes per request.
 
 A request takes the form of
 
@@ -618,20 +614,22 @@ The following scenarios can be tested:
 
 ## Get Messages Test Scenarios
 
-| Scenario                            | Grouping    | Local Reference Number (LRN)  | Message ID                                                     | Response                                                  |
-| ----------------------------------- | ----------- |------------------------------ | -------------------------------------------------------------- |---------------------------------------------------------- |
-| Failed submission                   |	    A       | lrnie8158976912               | XI000001                                                     | IE704                                                     |
-| Successful submission               |     A       | lrnie8156540856               | XI000002                                                     | IE801                                                     |
-| Happy path delivered                |	    A       | lrnie8155973812               | XI000003 <br> XI0000015                                      | IE801 <br> IE818                                          |
-| Goods received but rejected         |	    A       | lrnie8151695045               | XI000005 <br> XI0000016 <br> XI0000017                       | IE801 <br> IE818 <br> IE871                               |
-| Cancel a movement for a movementId  |	    A       | lrnie8155743934               | XI000006 <br> XI0000018                                      | IE801 <br> IE810                                          |
-| Change consignee                    |	    A & B   | lrnie8154968571               | XI000003 <br> XI0000019 <br> XI000004                        | IE801 <br> IE813 <br> IE801 (Sequence number incremented) |
-| Consignee rejected before sent      |	    B       | lrnie8153786132               | XI000005 <br> XI0000020                                      | IE801 <br> IE819                                          |
-| Multiple messages with duplicate    |	    B & C   | lrnie8155743960               | XI0000021 <br> X00008 <br> X00004 <br> X00006 <br> X000012   | IE801 <br> IE819 <br> IE802 <br> IE818 <br> IE810         |
-| Movement interrupted                |     C       | lrnie8155755321               | XI000321 <br> GB0023121                                      | IE801 <br> IE807                                          |
-| Event occurs during transit         |     C       | lrnie8155755323               | XI000321 <br> XI0003265 <br> GB0023126                       | IE801 <br> IE840 <br> IE807                               |
-| Change of destination               |     C       | lrnie8155755325               | XI004321 <br> GB002312688                                    | IE801 <br> IE803                                          |
-| Goods exported (1)                  |     C & D   | lrnie8155755326               | XI004321A <br> XI004321B <br> XI004321C                      | IE801 <br> IE829 <br> IE818                               |
-| Goods exported (2)                  |     C & D   | lrnie8155755327               | XI004321D <br> XI004321B <br> XI004321E                      | IE801 <br> IE829 <br> IE818                               |
-| Custom rejection                    |     D       | lrnie8155755329               | XI004322AB <br> XI004322                                     | IE801 <br> IE839                                          |
-| Manual closure and status response  |     D       | lrnie8155755330               | XI004323 <br> XI00432M <br> XI00432RR                        | IE801 <br> IE881 <br> IE905                               |
+Local Reference Numbers (LRN) can be used in any order to test a scenario. They can also be used multiple times by using a unique ERN each time
+
+| Scenario                            | Local Reference Number (LRN)  | Message ID                                                     | Response                                                  |
+| ----------------------------------- |------------------------------ | -------------------------------------------------------------- |---------------------------------------------------------- |
+| Failed submission                   | lrnie8158976912               | XI000001                                                     | IE704                                                     |
+| Successful submission               | lrnie8156540856               | XI000002                                                     | IE801                                                     |
+| Happy path delivered                | lrnie8155973812               | XI000003 <br> XI0000015                                      | IE801 <br> IE818                                          |
+| Goods received but rejected         | lrnie8151695045               | XI000005 <br> XI0000016 <br> XI0000017                       | IE801 <br> IE818 <br> IE871                               |
+| Cancel a movement for a movementId  | lrnie8155743934               | XI000006 <br> XI0000018                                      | IE801 <br> IE810                                          |
+| Change consignee                    |	lrnie8154968571               | XI000003 <br> XI0000019 <br> XI000004                        | IE801 <br> IE813 <br> IE801 (Sequence number incremented) |
+| Consignee rejected before sent      |	lrnie8153786132               | XI000005 <br> XI0000020                                      | IE801 <br> IE819                                          |
+| Multiple messages with duplicate    |	lrnie8155743960               | XI0000021 <br> X00008 <br> X00004 <br> X00006 <br> X000012   | IE801 <br> IE819 <br> IE802 <br> IE818 <br> IE810         |
+| Movement interrupted                | lrnie8155755321               | XI000321 <br> GB0023121                                      | IE801 <br> IE807                                          |
+| Event occurs during transit         | lrnie8155755323               | XI000321 <br> XI0003265 <br> GB0023126                       | IE801 <br> IE840 <br> IE807                               |
+| Change of destination               | lrnie8155755325               | XI004321 <br> GB002312688                                    | IE801 <br> IE803                                          |
+| Goods exported (1)                  | lrnie8155755326               | XI004321A <br> XI004321B <br> XI004321C                      | IE801 <br> IE829 <br> IE818                               |
+| Goods exported (2)                  | lrnie8155755327               | XI004321D <br> XI004321B <br> XI004321E                      | IE801 <br> IE829 <br> IE818                               |
+| Custom rejection                    | lrnie8155755329               | XI004322AB <br> XI004322                                     | IE801 <br> IE839                                          |
+| Manual closure and status response  | lrnie8155755330               | XI004323 <br> XI00432M <br> XI00432RR                        | IE801 <br> IE881 <br> IE905                               |
