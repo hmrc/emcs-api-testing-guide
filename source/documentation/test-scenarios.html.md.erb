@@ -482,7 +482,7 @@ A success response will return the message as XML.
 ## Endpoint: Get information relating to an excise trader
 
 
-You can test [this endpoint]() in the External Test environment by calling `https://test-api.service.hmrc.gov.uk/customs/excise/traders`.
+You can test [this endpoint](/api-documentation/docs/api/service/excise-movement-control-system-api/1.0/oas/page#tag/Traders/operation/prevalidateTrader) in the External Test environment by calling `https://test-api.service.hmrc.gov.uk/customs/excise/traders/pre-validate`.
 
 There is a limit of 10 product codes per request.
 
@@ -566,17 +566,6 @@ A 400 Bad Request error will occur for the following:
 - invalid request 
 - badly formed JSON 
 - mandatory fields are missing
-- headers are missing. 
-
-Mandatory headers are: 
-
-- Accept
-- Authorization
-- Content-Type
-- DateTime
-- Source
-- X-Correlation-Id
-- X-Forwarded-Id
 
 A 400 Bad Request error will take the form of
 
