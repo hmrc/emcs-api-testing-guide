@@ -135,6 +135,8 @@ You can test [this endpoint](/api-documentation/docs/api/service/excise-movement
 
 All four query parameters are optional.
 
+If you are polling this endpoint for updated movements, you may want to consider using the latest `lastUpdated` from the response as the `updatedSince` query parameter, next time you poll as an optimisation.
+
 A success response will take the form of 
 
 ```
@@ -145,12 +147,14 @@ A success response will take the form of
     "localReferenceNumber": "LRNQA20230909022221",
     "consigneeId": "GBWKQOZ8OVLYR",
     "administrativeReferenceCode": "35WE3B5EDSYSZ86STVKH8",
+    "lastUpdated": "2024-01-17T12:25:29.540Z"
   },
   {
     "movementId" : "0055d33f-579e-4560-a3ee-03482d8d9dad",
     "consignorId": "GBWK002281023",
     "consigneeId": "GBWKQOZ8OVLYQ",
     "localReferenceNumber": "LRNQA20230909022224",
+    "lastUpdated": "2024-01-17T15:25:29.540Z"
   }
 ]
 ```
@@ -181,6 +185,7 @@ A success response will take the form of
   "localReferenceNumber": "LRNQA20230909022221",
   "consigneeId": "GBWKQOZ8OVLYR",
   "administrativeReferenceCode": "35WE3B5EDSYSZ86STVKH8",
+  "lastUpdated": "2024-01-17T15:25:29.540Z"
 }
 ```
 
