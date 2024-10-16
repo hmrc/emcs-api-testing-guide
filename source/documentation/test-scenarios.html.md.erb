@@ -630,3 +630,100 @@ Local Reference Numbers (LRN) can be used in any order to test a scenario. They 
 | Custom rejection                    | lrnie8155755329               | XI004322AB <br> XI004322                                     | IE801 <br> IE839                                          |
 | Manual closure and status response  | lrnie8155755330               | XI004323 <br> XI00432M <br> XI00432RR                        | IE801 <br> IE881 <br> IE905                               |
 | Message reminder                    | lrnie8155755331               | XI001624 <br> X00017                                         | IE801 <br> IE802                                          |
+
+
+## Endpoint: Excise Pre-Validation
+
+You can test [this endpoint](/api-documentation/docs/api/service/excise-movement-control-system-api/1.0/oas/page#tag/Traders/operation/pre-validate-trader) in the External Test environment by calling `https://test-api.service.hmrc.gov.uk/customs/excise/traders/pre-validate`.
+
+A valid request takes the form of
+
+```
+{
+  "exciseId": "GBWK000000206",
+  "entityGroup": "UK Record",
+  "products": [
+    {
+      "exciseProductCode": "W300"
+    }
+  ]
+}
+```
+
+Alternatively, since entityGroup and products are optional
+
+```
+{
+  "exciseId": "GBWK000000206"
+}
+```
+
+A 200 success response will take the form of
+
+```
+{
+  "processingDateTime": "2021-12-17T09:31:12.123Z",
+  "exciseId": "GBWK000000206",
+  "validationResult": "Pass"
+}
+```
+
+A 200 Invalid Trader response will take the form of
+
+```
+{
+  "processingDateTime": "2021-12-17T09:31:12.123Z",
+  "exciseId": "GBWK000000206",
+  "validationResult": "Fail",
+  "failDetails": {
+    "validTrader": true,
+    "errorCode": 1,
+    "errorText": "Expired",
+    "validateProductAuthorisationResponse": {
+      "productError": [
+        {
+          "exciseProductCode": "W300",
+          "errorCode": 2,
+          "errorText": "Unauthorised EPC"
+        }
+      ]
+    }
+  }
+}
+```
+
+A 400 Bad Request error will occur for the following:
+
+- invalid request
+- badly formed JSON
+- mandatory fields are missing
+
+A 400 Bad Request error will take the form of
+
+```
+{
+  "processingDateTime": "2021-12-17T09:31:12.123Z",
+  "message": "invalid message format"
+}
+```
+
+A 500 Internal Server Error response can be triggered to represent internal server errors. It will take the form of
+
+```
+{
+  "processingDateTime": "2021-12-17T09:31:12.123Z",
+  "messages": [
+    "internal server error",
+    "another error message"
+  ]
+}
+```
+
+The following scenarios can be tested:
+
+| Scenario                     | 	Response               |
+|:-----------------------------|:--------------------------|
+|Send exciseProductCode as W300 or S200 | 200 with Invalid Product error(s) |
+|Send exciseRegistrationNumber SendA400 | 400 Bad Request with no message payload |
+|Send exciseRegistrationNumber SendA500 | 500 Internal Server Error with no message payload |
+|Any other valid value                  | 200 Success with Valid Trader Response |
