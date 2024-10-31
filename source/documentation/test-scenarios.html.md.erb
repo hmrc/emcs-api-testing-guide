@@ -607,6 +607,25 @@ The following scenarios can be tested:
 |Send exciseRegistrationNumber SendA500	|500 Internal Server Error with no message payload|
 |Any other valid value|	200 Success with Valid Trader Response|
 
+We have the following mappings for TraderType:
+
+| ERN Prefix              | Trader Type Description                         | Trader Type Value |
+|:------------------------|:------------------------------------------------|:------------------|
+| GBWK or XIWK            | Authorised Warehouse Keeper                     | 1                 |
+| GB00                    | Tax Warehouse                                   | 2                 |
+| GBRC or XIRC            | Registered Consignor                            | 3                 |
+| XI00                    | Registered Consignee                            | 4                 |
+| XITC                    | Temporary Registered Consignee                  | 5                 |
+| GBAA or XIAA            | Temporary Registered Consignee Certification    | 6                 |
+| GBAB or XIAB            | Temporary Certified Consignor Certification     | 6                 |
+| GBAC or XIAC            | Temporary Certified Consignee Certification     | 6                 |
+| XIPA                    | Certified Consignor                             | 7                 |
+| XIPB                    | Certified Consignee                             | 7                 |
+| XIPC                    | Temporary Certified Consignor                   | 7                 |
+| XIPD                    | Temporary Certified Consignee                   | 7                 |
+| GBDR                    | Duty Representative                             | 7                 |
+| GBOG                    | Registered Owner                                | 7                 |
+| <Anything else>         | Not Found                                       | 7                 |
 
 ## Get Messages Test Scenarios
 
