@@ -36,7 +36,7 @@ When testing your software, you can be sent automatic notifications using the Pu
 
 This is where notifications from EMCS are sent to your software in near real time.
 
-Only the consignor will receive Push Pull Notifications from the service.
+Consignors will receive Push Pull Notifications from the service. These notifications rely on the ERN being associated with a BoxId, which is updated each time an 815 draft movement is sent; this association remains valid for 30 days. Consignees will also receive these notifications when they have submitted an 815 draft movement as a consignor within the last 30 days, since their ERN is then linked to a BoxId under the same conditions.
 
 To get these automatic messages, you must:
 
