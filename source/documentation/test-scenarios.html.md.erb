@@ -607,133 +607,25 @@ The following scenarios can be tested:
 |Send exciseRegistrationNumber SendA500	|500 Internal Server Error with no message payload|
 |Any other valid value|	200 Success with Valid Trader Response|
 
+We have the following mappings for TraderType:
 
-## Endpoint: Subscribe an ERN to receive Push/Pull notifications
-
-
-You can test [this endpoint](/api-documentation/docs/api/service/excise-movement-control-system-api/1.0/oas/page#tag/Subscribe/operation/subscribeErn) in the External Test environment by calling `https://test-api.service.hmrc.gov.uk/customs/excise/erns/[YOUR_ERN]/subscription`.
-
-You will need to provide a request with a valid ern within the URI.
-
-The query Parameter is mandatory.
-
-A 200 success response will take the form of
-
-```
-{
-  "boxId": "42c75e22-7bba-44f2-a610-4b4c3b262e3e"
-}
-```
-
-A 400 Bad Request error will occur for the following:
-
-- Invalid JSON or mandatory fields missing
-
-A 400 Bad Request error will take the form of
-
-```
-{
-  "dateTime": "2024-01-17T15:27:29.540089Z",
-  "message": "Not valid SubscribeErn message",
-  "debugMessage": "Error parsing Json: exciseRegistrationNumber missing"
-}
-```
-
-A 401 Unauthorised error will occur for the following:
-
-- Authorisation Expired
-- Unauthorised ERN
-- Invalid enrolment parameter
-
-A 401 Unauthorised error will take the form of
-
-```
-{
-  "dateTime": "2024-01-17T15:27:29.540089Z",
-  "message": "Authorisation error",
-  "debugMessage": "Unauthorised Exception with error Bearer token expired"
-}
-```
-
-A 403 Forbidden error will occur for the following:
-
-- ERN being subscribed is not in authorisation bearer token
-
-A 403 Forbidden error will take the form of
-
-```
-{
-  "dateTime": "2024-01-17T16:27:41.095827Z",
-  "message": "Forbidden",
-  "debugMessage": "Invalid ERN provided"
-}
-```
-
-A 500 Internal Server Error response can be triggered to represent internal server errors. It will take the form of
-
-```
-{
-  "dateTime": "2021-12-17T09:30:47Z",
-  "message": "Invalid JSON structure",
-  "debugMessage": "JSON parse error: Unexpected character",
-  "correlationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
-}
-```
-
-## Endpoint: Unsubscribe an ERN to no longer receive Push/Pull notifications
-
-You can test [this endpoint](/api-documentation/docs/api/service/excise-movement-control-system-api/1.0/oas/page#tag/Subscribe/operation/unsubscribeErn) in the External Test environment by calling `https://test-api.service.hmrc.gov.uk/customs/excise/erns/[YOUR_ERN]/subscription`.
-
-You will need to provide a request with a valid ern within the URI.
-
-The query Parameter is mandatory.
-
-A 200 success response will take the form of
-
-```
-""
-```
-
-A 400 Bad Request error will occur for the following:
-
-- Invalid JSON or mandatory fields missing
-
-A 400 Bad Request error will take the form of
-
-```
-{
-  "dateTime": "2024-01-17T15:27:29.540089Z",
-  "message": "Not valid UnsubscribeErn message",
-  "debugMessage": "Error parsing Json: exciseRegistrationNumber missing"
-}
-```
-
-A 401 Unauthorised error will occur for the following:
-
-- Authorisation Expired
-- Unauthorised ERN
-- Invalid enrolment parameter
-
-A 401 Unauthorised error will take the form of
-
-```
-{
-  "dateTime": "2024-01-17T15:27:29.540089Z",
-  "message": "Authorisation error",
-  "debugMessage": "Unauthorised Exception with error Bearer token expired"
-}
-```
-
-A 500 Internal Server Error response can be triggered to represent internal server errors. It will take the form of
-
-```
-{
-  "dateTime": "2021-12-17T09:30:47Z",
-  "message": "Invalid JSON structure",
-  "debugMessage": "JSON parse error: Unexpected character",
-  "correlationId": "3e8dae97-b586-4cef-8511-68ac12da9028"
-}
-```
+| ERN Prefix              | Trader Type Description                         | Trader Type Value |
+|:------------------------|:------------------------------------------------|:------------------|
+| GBWK or XIWK            | Authorised Warehouse Keeper                     | 1                 |
+| GB00                    | Tax Warehouse                                   | 2                 |
+| GBRC or XIRC            | Registered Consignor                            | 3                 |
+| XI00                    | Registered Consignee                            | 4                 |
+| XITC                    | Temporary Registered Consignee                  | 5                 |
+| GBAA or XIAA            | Temporary Registered Consignee Certification    | 6                 |
+| GBAB or XIAB            | Temporary Certified Consignor Certification     | 6                 |
+| GBAC or XIAC            | Temporary Certified Consignee Certification     | 6                 |
+| XIPA                    | Certified Consignor                             | 7                 |
+| XIPB                    | Certified Consignee                             | 7                 |
+| XIPC                    | Temporary Certified Consignor                   | 7                 |
+| XIPD                    | Temporary Certified Consignee                   | 7                 |
+| GBDR                    | Duty Representative                             | 7                 |
+| GBOG                    | Registered Owner                                | 7                 |
+| <Anything else>         | Not Found                                       | 7                 |
 
 ## Get Messages Test Scenarios
 
